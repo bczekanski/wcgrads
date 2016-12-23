@@ -4,14 +4,14 @@ library(tidyr)
 # Use pdftotext extension? to convert pdf to txt
 # Still need to cut down and clean, *'s make it look like it will be easy
 
-function(file){
+get_data <- function(file){
 
 pdftotext <- "/Users/Ben/Documents/wcgrads/wcgrads/xpdfbin-mac-3.04/bin64/pdftotext"
 pdf <- file.path(paste0(file, ".pdf"))
 system(paste("\"", pdftotext, "\" \"", pdf, "\""," -raw", sep=""), wait = TRUE)
 
 # Now to get the text into a dataframe
-x <- read.delim(paste0(file, .txt), quote = "",
+x <- read.delim(paste0(file, ".txt"), quote = "",
                 stringsAsFactors = FALSE)
 colnames(x) <- "strings"
 y <- as.numeric(which(x$strings == "Bachelor of Arts, Summa Cum Laude")) + 1
