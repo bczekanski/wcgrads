@@ -1,10 +1,10 @@
+get_data <- function(file){
+
 library(dplyr)
 library(tidyr)
 
 # Use pdftotext extension? to convert pdf to txt
 # Still need to cut down and clean, *'s make it look like it will be easy
-
-get_data <- function(file){
 
 pdftotext <- "/Users/Ben/Documents/wcgrads/wcgrads/xpdfbin-mac-3.04/bin64/pdftotext"
 pdf <- file.path(paste0(file, ".pdf"))
