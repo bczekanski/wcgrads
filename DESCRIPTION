@@ -1,13 +1,19 @@
 Package: wcgrads
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Williams College Graduating Seniors
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: person("Ben", "Czekanski", email = "bczekanski@gmail.com",
+                  role = c("aut", "cre"))
+Maintainer: Ben Czekanski <bmczekanski@gmail.com>
+License: CC0
+Description: This package explores the distribution of initials among Williams College graduating seniors
 LazyData: TRUE
 RoxygenNote: 5.0.1
-Suggests: knitr,
-    rmarkdown
+Imports: knitr,
+  rmarkdown,
+  testthat,
+  ggplot2,
+  ggExtra,
+  dplyr,
+  tidyr
 VignetteBuilder: knitr

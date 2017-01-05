@@ -1,21 +1,25 @@
 download_pdfs <- function(){
+  #' @title download_pdfs
+  #' @description download_pdfs() adds pdf Williams College Catalogs from the Williams College website to data-raw
+  #' @usage download_pdfs()
+#Download each file from the Williams website
 
-`01` <- download.file('http://web.williams.edu/admin/registrar//catalog/depts0001/catalog.pdf', '01.pdf')
-`02` <- download.file('http://web.williams.edu/admin/registrar//catalog/depts0102/catalog.pdf', '02.pdf')
-`03` <- download.file('http://web.williams.edu/admin/registrar//catalog/depts0203/catalog.pdf', '03.pdf')
-`04` <- download.file('http://web.williams.edu/admin/registrar//catalog/depts0304/catalog.pdf', '04.pdf')
-`05` <- download.file('http://web.williams.edu/admin/registrar//catalog/depts0405/catalog0405.pdf', '05.pdf')
-`06` <- download.file('http://web.williams.edu/admin/registrar//catalog/catalog0506.pdf', '06.pdf')
-`07` <- download.file('http://web.williams.edu/admin/registrar//catalog/catalog0607.pdf', '07.pdf')
-`08` <- download.file('http://web.williams.edu/admin/registrar//catalog/catalog0708.pdf', '08.pdf')
-`09` <- download.file('http://web.williams.edu/admin/registrar//catalog/catalog0809.pdf', '09.pdf')
-`10` <- download.file('http://web.williams.edu/admin/registrar//catalog/catalog0910.pdf', '10.pdf')
-`11` <- download.file('http://web.williams.edu/admin/registrar//catalog/bulletin2010-11.pdf', '11.pdf')
-`12` <- download.file('http://web.williams.edu/admin/registrar//catalog/bulletin2011_12.pdf', '12.pdf')
-`13` <- download.file('http://web.williams.edu/admin/registrar//catalog/bulletin12_13.pdf', '13.pdf')
-`14` <- download.file('http://web.williams.edu/admin/registrar//catalog/bulletin2013_14.pdf', '14.pdf')
-`15` <- download.file('http://web.williams.edu/admin/registrar//catalog/bulletin2014_15.pdf', '15.pdf')
-`16` <- download.file('http://web.williams.edu/admin/registrar//catalog/bulletin2015_16.pdf', '16.pdf')
-`17` <- download.file('http://web.williams.edu/admin/registrar//catalog/bulletin2016_17.pdf', '17.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/depts0001/catalog.pdf', 'data-raw/01.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/depts0102/catalog.pdf', 'data-raw/02.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/depts0203/catalog.pdf', 'data-raw/03.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/depts0304/catalog.pdf', 'data-raw/04.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/depts0405/catalog0405.pdf', 'data-raw/05.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/catalog0506.pdf', 'data-raw/06.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/catalog0607.pdf', 'data-raw/07.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/catalog0708.pdf', 'data-raw/08.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/catalog0809.pdf', 'data-raw/09.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/catalog0910.pdf', 'data-raw/10.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/bulletin2010-11.pdf', 'data-raw/11.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/bulletin2011_12.pdf', 'data-raw/12.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/bulletin12_13.pdf', 'data-raw/13.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/bulletin2013_14.pdf', 'data-raw/14.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/bulletin2014_15.pdf', 'data-raw/15.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/bulletin2015_16.pdf', 'data-raw/16.pdf')
+download.file('http://web.williams.edu/admin/registrar//catalog/bulletin2016_17.pdf', 'data-raw/17.pdf')
 
 }

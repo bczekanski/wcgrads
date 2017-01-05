@@ -2,11 +2,18 @@
 % Please edit documentation in R/visual.R
 \name{visual}
 \alias{visual}
-\title{make plot}
+\title{visual}
 \usage{
 visual(x)
 }
+\arguments{
+\item{x}{The data to be plotted}
+}
+\value{
+A graph showing the joint and marginal distribution of initials
+}
 \description{
-make plot
+visual() makes a graphic showing the frequency of two variables and their marginal distributions.
+It is intended to be used to show distribution of initials
 }
 
