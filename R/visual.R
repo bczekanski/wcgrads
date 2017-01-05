@@ -6,6 +6,8 @@ visual <- function(x) {
 #' @param x The data to be plotted
 #' @return A graph showing the joint and marginal distribution of initials
 #' @usage visual(x)
+#' @export
+#' @import ggplot2 ggExtra dplyr
 
 #Make main plot
 
@@ -17,6 +19,8 @@ a <- x %>%
 #Add Marginal Plots
 
 b <- ggMarginal(a, x, x$firstinit, x$lastinit, type = "histogram", margins = "both", stat = "count")
+
+ggsave(filename = "vignettes/initials.png", plot=b)
 
 return(b)
 

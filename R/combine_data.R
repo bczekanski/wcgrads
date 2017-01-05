@@ -5,6 +5,8 @@ combine_data <- function(){
 #' puts them together to form a single, clean data frame
 #' @return The output of combine_data() is a data frame
 #' @usage combine_data()
+#' @export
+#' @import dplyr
 
 #Mark each year in preparation to combine all of the years
 

@@ -5,6 +5,8 @@ get_data <- function(file){
 #' @param file The file, a Williams College catalog, to be converted from pdf and cleaned
 #' @return The output of get_data() is a data frame
 #' @usage get_data(file)
+#' @export
+#' @import tidyr dplyr
 
 #Use an executable script to convert .pdf files to .txt files
 
