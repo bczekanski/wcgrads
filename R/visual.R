@@ -4,7 +4,7 @@ library(wcgrads)
 library(dplyr)
 library(ggplot2)
 library(ggExtra)
-
+#' make plot
 a <- x %>%
   ggplot(aes(firstinit, lastinit)) +
   geom_bin2d() +
