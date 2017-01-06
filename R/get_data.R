@@ -28,11 +28,12 @@ w <- as.data.frame(x[y:z,])
 v <- w %>%
   rename(strings = `x[y:z, ]`) %>%
   separate(strings, c("name", "honors"), sep = ",")
-v <- gsub(".*(Astrophysics|Biology|Chemistry|Classics|Econom|
+v <- gsub(".*(Art|Astrophysics|Biology|Chemistry|Classics|Econom|
           English|Environmental Studies|Geosciences|French|History|
-          Literature|Mathematics|Music|Neuroscience|Political Science|
-          Psychology|Russian|Science|Spanish|Studies|<|Bachelor of Arts|
-          Degrees Conferred|Phi Beta Kappa|Sigma|--|3).*", NA, v$name)
+          Literature|Mathematics|Music|Neuroscience|Philosophy|Political Science|
+          Psychology|Russian|Science|Sociology|Spanish|Studies|<|Bachelor of Arts|
+          Degrees Conferred|Phi Beta Kappa|Sigma|--|3|
+          and honors in|honors in English).*", NA, v$name)
 v <- tbl_df(v)
 v <- v %>%
   separate(value, c("first", "second"), sep = " ", extra = "merge") %>%

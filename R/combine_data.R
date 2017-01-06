@@ -53,8 +53,12 @@ all <- rbind(`01`, `02`, `03`, `04`, `05`, `06`, `07`, `08`,
 #Further clean data by dropping NA values
 
 all$firstinit <- sub("^$", NA, all$firstinit)
+all$firstinit <- sub("in", NA, all$firstinit)
+all$firstinit <- sub("honors", NA, all$firstinit)
 all <- all %>%
   drop_na(firstinit, lastinit)
+all$firstinit <- toupper(all$firstinit)
+all$lastinit <- toupper(all$lastinit)
 
 return(all)
 

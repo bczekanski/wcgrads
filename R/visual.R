@@ -14,13 +14,17 @@ visual <- function(x) {
 a <- x %>%
   ggplot(aes(firstinit, lastinit)) +
   geom_bin2d() +
-  scale_fill_gradient2()
+  scale_fill_gradient2() +
+  theme(panel.background = element_rect(fill = 'white', colour = 'white')) +
+  ylab("Last Initial") +
+  xlab("First Initial") +
+  ggtitle("Distribution of Initials")
 
 #Add Marginal Plots
 
 b <- ggMarginal(a, x, x$firstinit, x$lastinit, type = "histogram", margins = "both", stat = "count")
 
-ggsave(filename = "vignettes/initials.png", plot=b)
+#ggsave(filename = "vignettes/initials.png", plot=b)
 
 return(b)
 
