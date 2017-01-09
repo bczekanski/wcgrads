@@ -15,14 +15,16 @@ a <- x %>%
   ggplot(aes(firstinit, lastinit)) +
   geom_bin2d() +
   scale_fill_gradient2() +
-  theme(panel.background = element_rect(fill = 'white', colour = 'white')) +
+  theme(panel.background = element_rect(fill = 'white', colour = 'white'), legend.position = "left") +
   ylab("Last Initial") +
   xlab("First Initial") +
-  ggtitle("Distribution of Initials")
+  ggtitle("Initials of Williams College Graduates (2001-2016)") +
+  scale_x_discrete(position = "top") +
+  scale_y_discrete(position = "right")
 
 #Add Marginal Plots
 
-b <- ggMarginal(a, x, x$firstinit, x$lastinit, type = "histogram", margins = "both", stat = "count")
+b <- ggMarginal(a, x, x$firstinit, x$lastinit, type = "histogram", margins = "both", stat = "count", xparams = list(labels = TRUE))
 
 #ggsave(filename = "vignettes/initials.png", plot=b)
 
