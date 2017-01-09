@@ -11,9 +11,7 @@ vignette: >
 
 ##Introduction
 
-The package __wcgrads__ examines the distribution of initials of Williams College Graduates. It uses information published by the Registrar of the College in pdf form and 
-
-to show which combinations of initials are most popular, and visualizes this information.
+The package __wcgrads__ examines the distribution of initials of Williams College Graduates. It uses information published by the Registrar of the College in pdf form and analyzes find which combinations of initials are most popular, and visualizes this information.
 
 ---
 
