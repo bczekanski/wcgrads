@@ -2,6 +2,7 @@ download_pdfs <- function(){
   #' @title download_pdfs
   #' @description download_pdfs() adds pdf Williams College Catalogs from the Williams College website to data-raw
   #' @usage download_pdfs()
+  #' @import utils
   #' @export
 
 #Download each file from the Williams website
