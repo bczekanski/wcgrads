@@ -10,7 +10,7 @@ get_data <- function(file){
 
 #Use an executable script to convert .pdf files to .txt files
 
-pdftotext <- "exec/pdftotext"
+pdftotext <- "wcgrads/exec/pdftotext"
 pdf <- file.path(paste0("data-raw/", file, ".pdf"))
 system(paste("\"", pdftotext, "\" \"", pdf, "\""," -raw", sep=""), wait = TRUE)
 
