@@ -4,7 +4,7 @@ get_data <- function(file){
 #' @description get_data() converts the pdf Williams College Catalog to a partially clean data frame
 #' @param file The file, a Williams College catalog, to be converted from pdf and cleaned
 #' @return The output of get_data() is a data frame
-#' @usage get_data(file)
+#' @usage get_data(file), for a 1999-2000 catalog, type: get_data("00")
 #' @export
 #' @import tidyr dplyr
 

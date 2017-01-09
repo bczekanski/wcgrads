@@ -1,6 +1,6 @@
 ---
 title: "Williams College Initials"
-author: "Ben Czekanski"
+author: "Ben Czekanski, Middlebury '18"
 date: "January 9, 2017"
 output: 
   pdf_document

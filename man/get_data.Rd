@@ -4,7 +4,7 @@
 \alias{get_data}
 \title{get_data}
 \usage{
-get_data(file)
+get_data(file), for a 1999-2000 catalog, type: get_data("00")
 }
 \arguments{
 \item{file}{The file, a Williams College catalog, to be converted from pdf and cleaned}
