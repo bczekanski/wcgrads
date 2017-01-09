@@ -10,14 +10,16 @@ get_data <- function(file){
 
 #Use an executable script to convert .pdf files to .txt files
 
-#shQuote("exec/pdftotext")
-pdftotext <- system.file("bin/pdftotext", package = "wcgrads")
-pdf <- file.path(paste0("data-raw/", file, ".pdf"))
+pdftotext <- system.file("bin/pdftotext", package = "wcgrads", mustWork = TRUE)
+pdf_file <- paste0("data-raw/", file, ".pdf")
+pdf <- file.path(pdf_file)
+
 system(paste("\"", pdftotext, "\" \"", pdf, "\""," -raw", sep=""), wait = TRUE)
 
 #Read .txt files as a data frame and find the list of graduating seniors
 
-x <- read.delim(paste0("data-raw/", file, ".txt"), quote = "",
+text_file <- paste0("data-raw/", file, ".txt")
+x <- read.delim(text_file, quote = "",
                 stringsAsFactors = FALSE)
 colnames(x) <- "strings"
 y <- as.numeric(which(x$strings == "Bachelor of Arts, Summa Cum Laude")) + 1
