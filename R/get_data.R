@@ -9,8 +9,9 @@ get_data <- function(file){
 #' @import tidyr dplyr
 
 #Use an executable script to convert .pdf files to .txt files
-set_path("wcgrads/")
-pdftotext <- "exec/pdftotext"
+
+#shQuote("exec/pdftotext")
+pdftotext <- "inst/bin/pdftotext"
 
 pdf <- file.path(paste0("data-raw/", file, ".pdf"))
 system(paste("\"", pdftotext, "\" \"", pdf, "\""," -raw", sep=""), wait = TRUE)
