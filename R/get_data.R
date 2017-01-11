@@ -13,7 +13,6 @@ get_data <- function(file){
 pdftotext <- system.file("bin/pdftotext", package = "wcgrads", mustWork = TRUE)
 pdf_file <- system.file(paste0("extdata/", file, ".pdf"), package = "wcgrads", mustWork = TRUE)
 pdf <- file.path(pdf_file)
-
 system(paste("\"", pdftotext, "\" \"", pdf, "\""," -raw", sep=""), wait = TRUE)
 
 #Read .txt files as a data frame and find the list of graduating seniors
