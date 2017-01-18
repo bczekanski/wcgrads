@@ -10,8 +10,12 @@ visual <- function(x) {
 #' @import ggplot2 ggExtra dplyr
 
 #Make main plot
+u <- all %>%
+  select(first, last, grad_year) %>%
+  mutate(firstinit = toupper(substr(gsub("[^[:alnum:] ]", "", first), 1, 1))) %>%
+  mutate(lastinit = toupper(substr(last, 1, 1)))
 
-a <- x %>%
+a <- u %>%
   ggplot(aes(firstinit, lastinit)) +
   geom_bin2d() +
   scale_fill_gradient2() +
@@ -24,7 +28,7 @@ a <- x %>%
 
 #Add Marginal Plots
 
-b <- ggMarginal(a, x, x$firstinit, x$lastinit, type = "histogram", margins = "both", stat = "count", xparams = list(labels = TRUE))
+b <- ggMarginal(a, u, u$firstinit, u$lastinit, type = "histogram", margins = "both", stat = "count", xparams = list(labels = TRUE))
 
 #ggsave(filename = "vignettes/initials.png", plot=b)
 

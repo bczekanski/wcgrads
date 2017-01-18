@@ -1,4 +1,4 @@
-download_pdfs <- function(){
+getpdfs <- function(){
   #' @title download_pdfs
   #' @description download_pdfs() adds pdf Williams College Catalogs from the Williams College website to data-raw
   #' @usage download_pdfs()

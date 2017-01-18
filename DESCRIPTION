@@ -15,5 +15,6 @@ Imports: knitr,
   ggplot2,
   ggExtra,
   dplyr,
-  tidyr
+  tidyr,
+  stringr
 VignetteBuilder: knitr
