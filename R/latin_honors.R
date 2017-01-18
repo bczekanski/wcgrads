@@ -1,30 +1,58 @@
+latin_honors <- function(){
+
+#' @title
+#' @description
+#' @param
+#' @return
+#' @usage
+#' @import dplyr ggplot2
+#' @export
+
 a <- all %>%
-  select(grad_year, latin_honors) %>%
-  group_by(grad_year, latin_honors) %>%
+  select(grad.year, latin.honors) %>%
+  group_by(grad.year, latin.honors) %>%
   summarize(count = n()) %>%
   ungroup() %>%
-  group_by(grad_year) %>%
-  mutate(yrly_count = sum(count)) %>%
-  filter(is.na(latin_honors) == FALSE) %>%
-  mutate(yrly_pct = count/yrly_count)
+  group_by(grad.year) %>%
+  mutate(yrly.count = sum(count)) %>%
+  filter(is.na(latin.honors) == FALSE) %>%
+  mutate(yrly.pct = count/yrly.count)
 
- # %>%
- #  mutate(yrly_pct = ifelse(is.na(latin_honors) == TRUE, 1 - yrly_pct, yrly_pct)) %>%
- #  mutate(latin_honors = ifelse(is.na(latin_honors) == TRUE, "Total Honors", latin_honors))
- #
-
-
-a %>%
-  ggplot(aes(grad_year, yrly_pct, fill = latin_honors)) +
+z <- a %>%
+  ggplot(aes(grad.year, yrly.pct, fill = latin.honors)) +
      geom_bar(stat = "identity", position = "dodge")
 
+return(z)
+
+}
+
+total_latin_honors <- function(){
+
+#' @title
+#' @description
+#' @param
+#' @return
+#' @usage
+#' @import dplyr ggplot2
+#' @export
 
 b <- a %>%
-  mutate(yrly_pct = ifelse(latin_honors == "Magna Cum Laude", yrly_pct + lead(yrly_pct), yrly_pct)) %>%
-  mutate(yrly_pct = ifelse(latin_honors == "Cum Laude", yrly_pct + lead(yrly_pct), yrly_pct))
+  select(grad.year, latin.honors) %>%
+  group_by(grad.year, latin.honors) %>%
+  summarize(count = n()) %>%
+  ungroup() %>%
+  group_by(grad.year) %>%
+  mutate(yrly.count = sum(count)) %>%
+  filter(is.na(latin.honors) == FALSE) %>%
+  mutate(yrly.pct = count/yrly.count) %>%
+  mutate(yrly.pct = ifelse(latin.honors == "Magna Cum Laude", yrly.pct + lead(yrly.pct), yrly.pct)) %>%
+  mutate(yrly.pct = ifelse(latin.honors == "Cum Laude", yrly.pct + lead(yrly.pct), yrly.pct))
 
-b %>%
-  ggplot(aes(grad_year, yrly_pct, fill = latin_honors)) +
+c <- b %>%
+  ggplot(aes(grad.year, yrly.pct, fill = latin.honors)) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_hline(yintercept = c(.02, .15, .35))
 
+return(c)
+
+}

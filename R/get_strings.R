@@ -1,26 +1,52 @@
 pdf2txt <- function(file) {
-  #' @import dplyr stringr
+
+#' @title PDF to Text
+#' @description pdf2txt() converts Williams College Course Catalogs from .pdf to .txt
+#' @param file The file, a Williams College Course Catalog, to be converted from pdf
+#' @return The output of pdftotxt is a txt version of the Williams College Course Catalog
+#' in the same location as the .pdf that it took as input.
+#' @usage pdf2txt("00") converts the pdf from 2000 to txt
+#' @export
 
 pdftotext <- system.file("bin/pdftotext", package = "wcgrads", mustWork = TRUE)
 pdf.file <- system.file(paste0("extdata/", file, ".pdf"), package = "wcgrads", mustWork = TRUE)
 pdf <- file.path(pdf.file)
 system(paste("\"", pdftotext, "\" \"", pdf, "\""," -raw", sep=""), wait = TRUE)
 text.file <- system.file(paste0("extdata/", file, ".txt"), package = "wcgrads", mustWork = TRUE)
+
 }
 
-findnames <- function(file){
+findstrings <- function(file){
+
+#' @title Find Strings
+#' @description findstrings() cuts the txt version of the Williams College Course Catalog to isolate the section
+#'  of the Catalog that is just list of graduating seniors.
+#' @param file The file, a Williams College Course Catalog, in .txt form, to be cut down to just the list of graduated seniors.
+#' @return findstrings(file) returns a tbl_df() of the section of the Williams College Course Catalog that contains the list of graduated seniors.
+#' @usage findstrings("00") cuts the 2000 catalog to just the graduated seniors mentioned in the document
+#' @export
 
 x <- read.delim(file, quote = "", stringsAsFactors = FALSE)
 colnames(x) <- "strings"
 y <- as.numeric(which(x$strings == "Bachelor of Arts, Summa Cum Laude")) + 1
 z <- as.numeric(which(x$strings == "CONFERRING OF HONORARY DEGREES")) - 1
-w <- as.data.frame(x[y:z,], stringsAsFactors = FALSE)
+w <- tbl_df(x[y:z,])
 colnames(w) <- "strings"
 
 return(w)
+
 }
 
 makestrings <- function(file){
+
+#' @title Find Strings
+#' @description makestrings() takes the list of names given by findstrings() and combines
+#' incomplete entries to form complete entries of graduating seniors
+#' @param file The file, a section Williams College Course Catalog, in .txt form. This section may not be complete lines.
+#' @return The output of makestrings is a tbl_df() of complete lines from the graduated seniors section of the Williams College Course Catalog.
+#' @usage makestrings("00") takes the output of findstrings("00") and gives complete lines from the Williams College Course Catalog.
+#' @import stringr dplyr
+#' @export
 
 w <- file
 
@@ -72,4 +98,5 @@ v <- w %>%
 v <- tbl_df(unique(v$names))
 
 return(v)
+
 }

@@ -1,11 +1,10 @@
-visual <- function(x) {
+initials <- function() {
 
 #' @title visual
 #' @description visual() makes a graphic showing the frequency of two variables and their marginal distributions.
 #' It is intended to be used to show distribution of initials
-#' @param x The data to be plotted
 #' @return A graph showing the joint and marginal distribution of initials
-#' @usage visual(x)
+#' @usage visual() shows...
 #' @export
 #' @import ggplot2 ggExtra dplyr
 
