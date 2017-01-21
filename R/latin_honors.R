@@ -8,7 +8,7 @@ latin_honors <- function(){
 #' @import dplyr ggplot2
 #' @export
 
-a <- all %>%
+a <- allyrs %>%
   select(grad.year, latin.honors) %>%
   group_by(grad.year, latin.honors) %>%
   summarize(count = n()) %>%
@@ -36,7 +36,7 @@ total_latin_honors <- function(){
 #' @import dplyr ggplot2
 #' @export
 
-b <- a %>%
+b <- allyrs %>%
   select(grad.year, latin.honors) %>%
   group_by(grad.year, latin.honors) %>%
   summarize(count = n()) %>%

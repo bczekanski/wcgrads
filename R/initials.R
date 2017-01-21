@@ -9,8 +9,8 @@ initials <- function() {
 #' @import ggplot2 ggExtra dplyr
 
 #Make main plot
-u <- all %>%
-  select(first, last, grad_year) %>%
+u <- allyrs %>%
+  select(first, last, grad.year) %>%
   mutate(firstinit = toupper(substr(gsub("[^[:alnum:] ]", "", first), 1, 1))) %>%
   mutate(lastinit = toupper(substr(last, 1, 1)))
 

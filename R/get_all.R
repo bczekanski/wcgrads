@@ -27,9 +27,9 @@ allyears <- function() {
   #' @param
   #' @return
   #' @usage
-  #' @import
+  #' @import dplyr
   #' @export
-  #'
+
 `01` <- getyr('01')
 `02` <- getyr('02')
 `03` <- getyr('03')
@@ -50,10 +50,10 @@ allyears <- function() {
 
 #Combine all years
 
-all <- rbind(`01`, `02`, `03`, `04`, `05`, `06`, `07`, `08`,
+allyrs <- rbind(`01`, `02`, `03`, `04`, `05`, `06`, `07`, `08`,
              `09`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`)
 
 
-return(tbl_df(all))
+return(tbl_df(allyrs))
 
 }
