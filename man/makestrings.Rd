@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_strings.R
 \name{makestrings}
 \alias{makestrings}
-\title{Find Strings}
+\title{Make Strings}
 \usage{
 makestrings("00") takes the output of findstrings("00") and gives complete lines from the Williams College Course Catalog.
 }

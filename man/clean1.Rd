@@ -4,9 +4,16 @@
 \alias{clean1}
 \title{Clean Data Part One}
 \usage{
-clean1(file)
+clean1("00") gives partially cleaned entries from the Williams College Course Catalog.
+}
+\arguments{
+\item{file}{A file that is the output of makestrings(), a set of complete strings,
+each a person in the Williams College Course Catalog.}
+}
+\value{
+clean1 returns partially cleaned data ready for clean2
 }
 \description{
-clean1()
+clean1() is the first part of the data cleaning series
 }
 

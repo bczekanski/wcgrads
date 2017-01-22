@@ -14,7 +14,11 @@ a <- allyrs %>%
 
 b <- a %>%
   ggplot(aes(grad.year, count)) +
-  geom_bar(stat = "identity", position = "dodge")
+  geom_bar(stat = "identity", position = "dodge") +
+  ggtitle("Graduating Seniors Over Time") +
+  xlab("Graduation Year") +
+  ylab("Graduating Seniors")
+
 
 return(b)
 
@@ -39,7 +43,7 @@ a <- allyrs %>%
   mutate(nospaces = gsub("'", "", nospaces)) %>%
   mutate(nospaces = gsub("-", "", nospaces)) %>%
   mutate(namelength = str_length(nospaces)) %>%
-  select(entirename, namelength) %>%
+  select(entirename, namelength, grad.year) %>%
   arrange(desc(namelength))
 
 return(a)

@@ -5,7 +5,7 @@ pdf2txt <- function(file) {
 #' @param file The file, a Williams College Course Catalog, to be converted from pdf
 #' @return The output of pdftotxt is a txt version of the Williams College Course Catalog
 #' in the same location as the .pdf that it took as input.
-#' @usage pdf2txt("00") converts the pdf from 2000 to txt
+#' @usage pdf2txt("00") converts the pdf from 1999-2000 to txt
 #' @export
 
 pdftotext <- system.file("bin/pdftotext", package = "wcgrads", mustWork = TRUE)
@@ -28,8 +28,11 @@ findstrings <- function(file){
 
 x <- read.delim(file, quote = "", stringsAsFactors = FALSE)
 colnames(x) <- "strings"
+#Find beginning of list of names
 y <- as.numeric(which(x$strings == "Bachelor of Arts, Summa Cum Laude")) + 1
+#Find end of list of names
 z <- as.numeric(which(x$strings == "CONFERRING OF HONORARY DEGREES")) - 1
+#Cut out the section of names
 w <- tbl_df(x[y:z,])
 colnames(w) <- "strings"
 
@@ -39,7 +42,7 @@ return(w)
 
 makestrings <- function(file){
 
-#' @title Find Strings
+#' @title Make Strings
 #' @description makestrings() takes the list of names given by findstrings() and combines
 #' incomplete entries to form complete entries of graduating seniors
 #' @param file The file, a section Williams College Course Catalog, in .txt form. This section may not be complete lines.
@@ -49,7 +52,7 @@ makestrings <- function(file){
 #' @export
 
 w <- file
-
+#Examine strings to see if they have various substrings
 comma <- str_detect(w$strings, ", with")
 contract <- str_detect(w$strings, "Contract")
 colon <- str_detect(w$strings, ":")
@@ -62,7 +65,7 @@ studies <- str_detect(w$strings, "Studies")
 honors <- str_detect(w$strings, "honors")
 others <- str_detect(w$strings, "Sigma|Degrees|Phi Beta|_____|42")
 space.count <- str_count(w$strings, " ")
-
+#Assign errors based on substrings
 w$error <- ifelse(comma == TRUE & in. == FALSE & inn == TRUE, 1, 0)
 w$error <- ifelse(comma == TRUE & (in. + inn) == 0, 2, w$error)
 w$error <- ifelse(space.count == 0, 3, w$error)
@@ -75,10 +78,10 @@ w$error <- ifelse(honors == TRUE & inn. == FALSE & w$error == 0, 9, w$error)
 w$error <- ifelse(comma == FALSE & honors == TRUE & w$error == 0, 10, w$error)
 w$error <- ifelse(comma == FALSE & studies == TRUE & w$error == 0, 11, w$error)
 w$error <- ifelse(and == TRUE & space.count == 1, 12, w$error)
-
+#Get errors around each line
 w$error.prior <- dplyr::lag(w$error, default = 0)
 w$error.post <- dplyr::lead(w$error, default = 0)
-
+#Combine broken strings by error code
 w$names <- ifelse(w$error == 1 | w$error == 2 | w$error == 4 | w$error == 9,
                     paste(w$strings, dplyr::lead(w$strings, 1), sep = " "), NA)
 w$names <- ifelse(w$error == 3 | w$error == 7 | w$error == 10 | w$error == 11 | w$error == 12,
@@ -88,7 +91,7 @@ w$names <- ifelse(w$error == 7 & (w$error.post == 11 | w$error.post == 6), paste
 w$names <- ifelse(is.na(w$names) == TRUE, w$strings, w$names)
 
 w <- tbl_df(w)
-
+#Cut out incomplete and/or duplicate strings
 v <- w %>%
   filter(error.prior != 2, error.prior != 9,
           error != 5, error != 6, error != 8,

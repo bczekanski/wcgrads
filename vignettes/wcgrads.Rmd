@@ -1,47 +1,65 @@
 ---
-title: "Williams College Initials"
+title: "Williams College Graduates"
 author: "Ben Czekanski, Middlebury '18"
-date: "January 9, 2017"
+date: "January 23, 2017"
 output: 
   pdf_document
 ---
 
-##Introduction
+#Introduction
 
-The package __wcgrads__ examines the distribution of initials of Williams College Graduates. It uses information published by the Registrar of the College in PDF and analyzes it to find which combinations of initials are most popular, and visualizes this information.
-
----
-
-##Data
-
-The data for this package comes from Course Catalogs posted online by the Williams College Registrar. These files are first downloaded and then converted to pdf using the pdftotext executable. They are then cut down to just the list of graduating seniors and further broken into first and last names. Once in first name last name format, the multiple graduating classes are combined into one data frame of all students that graduated from 2001-2016.
+The package __wcgrads__ examines data on graduating seniors from 2000 to 2016 published in the Williams College Course Catalog. The Catalog is published as a PDF document, so this package converts catalog from .pdf to .txt and then cleans it into a tidy format for analysis. __wcgrads__ includes analyses of different elements of this data. These analyses cover graduates initials' and name lengths, as well as the distribution of latin honors over time. While the included analyses are interesting and informative, __wcgrads__ allows the user to perform their own examinations by including the cleaned version of these catalogs. 
 
 ---
 
-##Functions
+#Data
 
-There are four functions within the __wcgrads__ package:
+The data for this package comes from Course Catalogs posted online by the Williams College Registrar. These files are first downloaded and then converted to pdf using the pdftotext executable. After being converted to .txt, the catalog is cut down to just the list of graduating seniors and then cleaned into a single line of data per graduate. Once in this single line format, all graduating classes are combined into a single data frame of all students that graduated from 2000-2016. This data frame is called "allyrs" and it contains the Catalogs' information on name, Phi Beta Kappa, graduation year, latin honors, and departmental major. In addition "allyrs" adds gender to the information provided in the Catalogs. It is important to note that this is gender predicted by the R package __gender__ using the method "ssa" and is almost certainly not completely correct. However, providing predicted gender gives package users additional, interesting information to analyze.
 
-**_download_pdfs_**
+---
 
-_download_pdfs()_ simply downloads the Course Catalogs in pdf form
+#Analyses
 
-**_get_data_**
+The first question we can answer using this data is "What is the longest name?". This question can be answered using the namelength() function. 
 
-_get_data(file)_ converts these pdfs to txt to a data frame and then cuts out the parts that aren't names. It also breaks the strings of names and honors into just first and last initials.
-
-**_combine_data_**
-
-_combine_data()_ uses all _get_data_ to make all of the pdfs into txt documents and then one large, cleaned data frame of all the initials and graduation years
-
-**_visual_**
-
-_visual(x)_ creates a visualization of initials showing both the joint and marginal distributions of first and last initials for all graduates from 2001-2016, as shown below.
-
-```{r fig.width=7, fig.height=6, echo = FALSE, warning = FALSE}
+```{r warning = FALSE}
 library(wcgrads)
-visual(x)
+names <- namelength()
+head(names, 10)
 ```
 
-##Conclusion
-Looking at the plot generated, we see several main trends. First, the distribution of last initials appears to be much more even than the distribution of first initials. This suggests that there may be some letters that are more popular than others. When given the choice of first initial, letters A-E, J-N, and R-T are given more than other letters. This could also simply be because there are more options for first names that start with these initials. The difference between first and last initals appears to be greatest in F-H and W, which all occur as last initials much more than they do as first initials. Another interesting aspect of the graphic is observing which first initials are more or less popular given a last initial. For example, L and K occur as last initials at a similar rate. However, the pairing CL occurs much more frequently than the pairing CK, possibly due to avoidance of alliteration. Inversely, while E and K occur about as frequently as first names, EC occurs much more than KC. The plot offers the opportunity to make many other observations, and I invite the reader to explore them. Further advancements on this subject could include showing change over time, further breakdown by name, or breaking this down by sound rather than letter to further examine how sound affects name choice. Another possible use of the data is to compare Williams graduates to other NESCAC schools or the population as a whole. 
+Next we can answer the question "How has the number of graduating seniors changed over time?". The gradcount() function can answer this question easily by provinding a graph showing the change over time.
+
+```{r warning = FALSE}
+library(wcgrads)
+gradcount()
+```
+Yet another question that the allyrs data allows us to answer is "How has the distribution of latin honors changed over time?". __wcgrads__ has a function for that as well. latin_honors() shows the percentage of students that received each level of latin honors by year. There is no general trend, but there is a decent amount of variation. Perhaps the variation can be explained by equal GPA's and the methodology used in the case of such ties.
+```{r warning = FALSE}
+library(wcgrads)
+latin_honors()
+```
+Delving further into latin honors, we find that the following in the Course Catalogs:
+
+"The Faculty will recommend to the Trustees that the degree of Bachelor of Arts with distinction be conferred
+upon those members of the graduating class who have passed all Winter Study Projects and obtained
+a four year average in the top:
+35% of the graduating class — Bachelor of Arts cum laude or higher
+15% of the graduating class — Bachelor of Arts magna cum laude or higher
+2% of the graduating class — Bachelor of Arts summa cum laude"
+
+The total_latin_honors() function shows the percentage distributions of cumulative latin honors, and compares them to the guidelines(in black) found in the Course Catalogs. Again there is no real trend, but there is inconsistency. For all of the levels of honors there are years where the distribution exceeds the guidelines, and years where it fails to reach the guideline. This is confusing because one would expect that if a tie did not allow the exact percentage to earn a certain level, there would be consistent rounding up or rounding down, such that the cumulative percentages are consistently above or below that recommendation. This variation causes concern because these honors are distinctions that appear on resumes, and that people work hard to achieve. It therefore seems unfair that latin honors are given liberally in some years and conservatively in others, without a clear methodology.
+```{r warning = FALSE}
+library(wcgrads)
+total_latin_honors()
+```
+
+A final, somewhat more trivial analysis of the data involves the distribution of initials. The initials() function performs this analysis and shows both the joint and marginal distribution of initials. Looking at the plot generated, we see several main trends. First, the distribution of last initials appears to be much more even than the distribution of first initials. This suggests that there may be some letters that are more popular than others. When given the choice of first initial, letters A-E, J-N, and R-T are given more than other letters. This could also simply be because there are more options for first names that start with these initials. The difference between first and last initals appears to be greatest in F-H and W, which all occur as last initials much more often than they do as first initials. Another interesting aspect of the graphic is observing which first initials are more or less popular given a last initial. For example, L and K occur as last initials at a similar rate. However, the pairing CL occurs much more frequently than the pairing CK, possibly due to avoidance of alliteration. Inversely, while E and K occur about as frequently as first names, EC occurs much more than KC. The plot offers the opportunity to make many other observations, and I invite the reader to explore them. Further advancements on this subject could include showing change over time, further breakdown by name, or breaking this down by sound rather than letter to further examine how sound affects name choice.
+```{r fig.width=7, fig.height=6, warning = FALSE}
+library(wcgrads)
+initials()
+```
+---
+
+#Conclusion
+The __wcgrads__ package uses the "allyrs" data to answer a number of questions, both important and trivial about Williams College graduates. The limited analyses included in the package also raise interesting questions ranging from how names are chosen to how the College handles ties in GPA when awarding latin honors. More important than any question it asks or answers, __wcgrads__ makes information buried in the Williams College Course Catalog easily available to anyone who wants to analyze it. 

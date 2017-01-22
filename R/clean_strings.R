@@ -1,38 +1,49 @@
 clean1 <- function(file){
 
 #' @title Clean Data Part One
-#' @description clean1()
-#' @param file
-#' @return
-#' @usage
+#' @description clean1() is the first part of the data cleaning series
+#' @param file A file that is the output of makestrings(), a set of complete strings,
+#' each a person in the Williams College Course Catalog.
+#' @return clean1 returns partially cleaned data ready for clean2
+#' @usage clean1("00") gives partially cleaned entries from the Williams College Course Catalog.
 #' @import stringr dplyr tidyr
 #' @export
 
 g <- file %>%
   rename(strings = value) %>%
+  #Convert text encoding
   mutate(strings = iconv(strings, from = "ISO-8859-1", to = "UTF-8")) %>%
+  #Cut out unnecessary numbers and weird characters
   mutate(strings = gsub('[0-9]', "", strings)) %>%
   mutate(strings = gsub(" \f", "", strings)) %>%
+  #Detect asterisk indicating Phi Beta kappa
   mutate(pbk = str_detect(strings, fixed("*", TRUE))) %>%
+  #Break into name section and honors section
   separate(strings, c("name", "honors"), sep = ", with") %>%
+  #In case where name is one string with no spaces, break by hyphens
   mutate(name = ifelse(str_count(name, " ") == 0, gsub(fixed("-", TRUE), fixed(" ", TRUE), name), name)) %>%
+  #Identify first name
   separate(name, c("first", "other"), sep = " ", extra = "merge") %>%
+  #Remove unnecessary characters
   mutate(first = sub(fixed("[*]", TRUE), "", first)) %>%
   mutate(first = sub(fixed("[+]", TRUE), "", first)) %>%
+  #Identify last name
   mutate(last = word(other, -1)) %>%
+  #Identify suffix and correct middle and lastname if necessary
   mutate(suffix = ifelse(last == "I" | last == "II" | last == "III" | last == "IV" | last == "V" | last == "Jr.", last, NA)) %>%
   mutate(last = ifelse(is.na(suffix) == FALSE, word(other, -2), last)) %>%
   mutate(middle = ifelse(is.na(suffix) == FALSE, word(other, 1, -3), word(other, 1, -2))) %>%
+  #Create alpha variable to use to check alphabetization
   mutate(alpha = gsub(c(" ","'"), "", last)) %>%
   mutate(alpha = gsub("'", "", alpha)) %>%
   mutate(alpha = tolower(alpha))
-
+#Identify where different latin honors levels start and end, and assign latin honors
 r <- as.numeric(which(str_detect(g$first, "Bachelor") == TRUE))
 
 g$latin.honors <- ifelse(row(g) <= r[3], "Cum Laude", NA)
 g$latin.honors <- ifelse(row(g) <= r[2], "Magna Cum Laude", g$latin.honors)
 g$latin.honors <- ifelse(row(g) <= r[1], "Summa Cum Laude", g$latin.honors)
-
+#Remove strings indicating changes in latin honors, as they are no longer necessary
 g <- g %>%
   filter(str_detect(first, "Bachelor") == FALSE)
 
@@ -42,15 +53,19 @@ return(g)
 
 clean2 <- function(file){
 
-#' @title
-#' @description
-#' @param
-#' @return
-#' @usage
+#' @title Clean Data Part Two
+#' @description clean2() is the second part of the data cleaning series, it focuses on correcting last names that have spaces
+#' and have been read incorrectly as a result.
+#' @param file A file that is the output of clean1(), a set of partially cleaned strings,
+#' each a person in the Williams College Course Catalog.
+#' @return clean2 returns partially cleaned data ready for clean3
+#' @usage clean2("00") gives partially cleaned entries from the Williams College Course Catalog.
 #' @import dplyr tidyr
 #' @export
 
+
   i <- file %>%
+    #Run tests to see if the last name fits alphabetically with the names around it
     mutate(honors.id = lead(alpha, 1, default = "0") <= lag(alpha, 1, default = "0")) %>%
     mutate(honors.id2 = lead(alpha, 2, default = "0") <= lag(alpha, 2, default = "0")) %>%
     mutate(honors.id3 = lead(alpha, 3, default = "0") <= lag(alpha, 3, default = "0")) %>%
@@ -66,6 +81,7 @@ clean2 <- function(file){
     mutate(split.wrong10 = alpha < lag(alpha, 10, default = "0") | alpha > lead(alpha, 10, default = "0")) %>%
     mutate(sw.sum = split.wrong + split.wrong2 + split.wrong3 + split.wrong4 + split.wrong5 +split.wrong10) %>%
     mutate(y = (sw.sum >3 & honors.sum <3)) %>%
+    #Run tests to examine if the first and last names are in the reverse of the usual order, because one is a family name, and correct it
     mutate(switched = (y == TRUE & first >= lag(alpha) & first <= lead(alpha) & str_count(other, " ") == 0)) %>%
     mutate(first = ifelse(switched == TRUE, paste(first, last, sep = "#"), first)) %>%
     mutate(last = ifelse(switched == TRUE, word(first, 1, sep = "#"), last)) %>%
@@ -74,7 +90,7 @@ clean2 <- function(file){
     mutate(alpha = gsub(c(" ","'"), "", last)) %>%
     mutate(alpha = gsub("'", "", alpha)) %>%
     mutate(alpha = tolower(alpha))
-
+#Repeat, focusing on misread last names due to spaces
   h <- i %>%
     mutate(honors.id = lead(alpha, 1, default = "0") <= lag(alpha, 1, default = "0")) %>%
     mutate(honors.id2 = lead(alpha, 2, default = "0") <= lag(alpha, 2, default = "0")) %>%
@@ -96,7 +112,7 @@ clean2 <- function(file){
     mutate(alpha = gsub(c(" ","'"), "", last)) %>%
     mutate(alpha = gsub("'", "", alpha)) %>%
     mutate(alpha = tolower(alpha))
-
+  #Repeat, focusing on misread last names due to spaces
   g <- h %>%
     mutate(honors.id = lead(alpha, 1, default = "0") <= lag(alpha, 1, default = "0")) %>%
     mutate(honors.id2 = lead(alpha, 2, default = "0") <= lag(alpha, 2, default = "0")) %>%
@@ -118,7 +134,7 @@ clean2 <- function(file){
     mutate(alpha = gsub(c(" ","'"), "", last)) %>%
     mutate(alpha = gsub("'", "", alpha)) %>%
     mutate(alpha = tolower(alpha))
-
+  #Repeat, focusing on misread last names due to spaces
   f <- g %>%
     mutate(honors.id = lead(alpha, 1, default = "0") <= lag(alpha, 1, default = "0")) %>%
     mutate(honors.id2 = lead(alpha, 2, default = "0") <= lag(alpha, 2, default = "0")) %>%
@@ -144,11 +160,13 @@ clean2 <- function(file){
 
 clean3 <- function(file, year){
 
-#' @title
-#' @description
-#' @param
-#' @return
-#' @usage
+#' @title Clean Data Part Three
+#' @description clean3() is the third part of the data cleaning series, it focuses on departmental honors
+#' @param file A file that is the output of clean2(), a set of partially cleaned strings,
+  #' each a person in the Williams College Course Catalog.
+#' @param year A year
+#' @return clean3 returns partially cleaned data ready for clean2
+#' @usage clean3("00") gives partially cleaned entries from the Williams College Course Catalog.
 #' @import dplyr tidyr
 #' @export
 

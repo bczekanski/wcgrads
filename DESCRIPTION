@@ -6,7 +6,8 @@ Author: person("Ben", "Czekanski", email = "bczekanski@gmail.com",
                   role = c("aut", "cre"))
 Maintainer: Ben Czekanski <bmczekanski@gmail.com>
 License: CC0
-Description: This package explores the distribution of initials among Williams College graduating seniors
+Description: This package cleans and examines data found in Williams College Course Catalogs about graduating seniors from 2000-2016.
+Depends: R (>= 3.1.0)
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports: knitr,

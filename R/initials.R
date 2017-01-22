@@ -21,15 +21,15 @@ a <- u %>%
   theme(panel.background = element_rect(fill = 'white', colour = 'white'), legend.position = "left") +
   ylab("Last Initial") +
   xlab("First Initial") +
-  ggtitle("Initials of Williams College Graduates (2001-2016)") +
+  ggtitle("Initials of Williams College Graduates (2000-2016)") +
   scale_x_discrete(position = "top") +
-  scale_y_discrete(position = "right")
+  scale_y_discrete(position = "right") +
+  theme(axis.ticks.x = element_blank()) +
+  theme(axis.ticks.y = element_blank())
 
 #Add Marginal Plots
 
 b <- ggMarginal(a, u, u$firstinit, u$lastinit, type = "histogram", margins = "both", stat = "count", xparams = list(labels = TRUE))
-
-#ggsave(filename = "vignettes/initials.png", plot=b)
 
 return(b)
 

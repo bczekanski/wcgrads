@@ -20,7 +20,12 @@ a <- allyrs %>%
 
 z <- a %>%
   ggplot(aes(grad.year, yrly.pct, fill = latin.honors)) +
-     geom_bar(stat = "identity", position = "dodge")
+     geom_bar(stat = "identity", position = "dodge") +
+     ggtitle("Latin Honors") +
+     xlab("Graduation Year") +
+     ylab("Percent Receiving Latin Honors") +
+     guides(fill = guide_legend(title = "Honors Level"))
+
 
 return(z)
 
@@ -51,7 +56,12 @@ b <- allyrs %>%
 c <- b %>%
   ggplot(aes(grad.year, yrly.pct, fill = latin.honors)) +
   geom_bar(stat = "identity", position = "dodge") +
-  geom_hline(yintercept = c(.02, .15, .35))
+  geom_hline(yintercept = c(.02, .15, .35)) +
+  ggtitle("Cumulative Latin Honors") +
+  xlab("Graduation Year") +
+  ylab("Cumulative Percent Receiving Latin Honors") +
+  guides(fill = guide_legend(title = "Honors Level"))
+
 
 return(c)
 

@@ -2,11 +2,11 @@
 % Please edit documentation in R/get_pdfs.R
 \name{getpdfs}
 \alias{getpdfs}
-\title{download_pdfs}
+\title{Get PDFs}
 \usage{
-download_pdfs()
+getpdfs()
 }
 \description{
-download_pdfs() adds pdf Williams College Catalogs from the Williams College website to data-raw
+getpdfs() downloads pdf Williams College Catalogs from the Williams College website to inst/exdata
 }
 
