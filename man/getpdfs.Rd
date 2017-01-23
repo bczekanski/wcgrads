@@ -7,6 +7,6 @@
 getpdfs()
 }
 \description{
-getpdfs() downloads pdf Williams College Catalogs from the Williams College website to inst/exdata
+getpdfs() downloads Williams College Catalogs PDFs from the Williams College website to inst/exdata
 }
 

@@ -232,6 +232,7 @@ else {
     #Add the h that was dropped earlier
     mutate(second.honors.level = ifelse(is.na(second.honors.level) == FALSE,
                                         paste0("h", second.honors.level), second.honors.level)) %>%
+    mutate(grad.year = gradyear) %>%
     select(-honors.id2, -honors.id3, -honors.id4, -honors.id5, -honors.id6, -honors.sum,
            -split.wrong2, -split.wrong3, -split.wrong4, -split.wrong5, -split.wrong10, -sw.sum, -alpha)
 }
@@ -250,7 +251,7 @@ clean4 <- function(file, year){
 #' @param year The year after the course catalog came out, for the 1999-2000 catalog, the year would be "00", the same as the file
 #' @return clean4 returns completely cleaned dataset for a single year.
 #' @usage clean4("file", "year")
-#' @import dplyr gender
+#' @import dplyr gender genderdata
 #' @export
 
 g <- file
