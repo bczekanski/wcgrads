@@ -5,7 +5,7 @@ clean1 <- function(file){
 #' @param file A file that is the output of makestrings(), a set of complete strings,
 #' each a person in the Williams College Course Catalog.
 #' @return clean1 returns partially cleaned data ready for clean2
-#' @usage clean1("00") gives partially cleaned entries from the Williams College Course Catalog.
+#' @usage clean1("file")
 #' @import stringr dplyr tidyr
 #' @export
 
@@ -59,7 +59,7 @@ clean2 <- function(file){
 #' @param file A file that is the output of clean1(), a set of partially cleaned strings,
 #' each a person in the Williams College Course Catalog.
 #' @return clean2 returns partially cleaned data ready for clean3
-#' @usage clean2("00") gives partially cleaned entries from the Williams College Course Catalog.
+#' @usage clean2("file")
 #' @import dplyr tidyr
 #' @export
 
@@ -161,23 +161,27 @@ clean2 <- function(file){
 clean3 <- function(file, year){
 
 #' @title Clean Data Part Three
-#' @description clean3() is the third part of the data cleaning series, it focuses on departmental honors
+#' @description clean3() is the third part of the data cleaning series, it focuses on departmental honors.
 #' @param file A file that is the output of clean2(), a set of partially cleaned strings,
   #' each a person in the Williams College Course Catalog.
-#' @param year A year
-#' @return clean3 returns partially cleaned data ready for clean2
-#' @usage clean3("00") gives partially cleaned entries from the Williams College Course Catalog.
+#' @param year The year after the course catalog came out, for the 1999-2000 catalog, the year would be "00", the same as the file.
+#' @return clean3 returns partially cleaned data ready for clean4
+#' @usage clean3("file", "year")
 #' @import dplyr tidyr
 #' @export
 
+#Define graduation year as the year the catalog came out
 gradyear <- as.numeric(paste0("20", year)) - 1
 
 if(gradyear == 2014) {
 
 g <- file %>%
   mutate(grad.year = gradyear) %>%
+  #Drop the comma still attached to some last names
   mutate(last = sub(fixed("[,]", TRUE), "", last)) %>%
+  #Break up dual departmental honors into two
   separate(honors, c("first.honors", "second.honors"), sep = "and with") %>%
+  #Break into department and level
   separate(first.honors, c("first.honors.level", "first.honors.dept"), sep = " in") %>%
   separate(second.honors, c("second.honors.level", "second.honors.dept"), sep = " in") %>%
   select(-honors.id2, -honors.id3, -honors.id4, -honors.id5, -honors.id6, -honors.sum,
@@ -190,20 +194,25 @@ else if(gradyear == 2005 | gradyear == 2008 | gradyear == 2013) {
 g <- file %>%
   mutate(grad.year = gradyear) %>%
   mutate(last = sub(fixed("[,]", TRUE), "", last)) %>%
+  #Find second honors dept by taking the last word in the honors string
   mutate(second.honors.dept = ifelse(str_detect(honors, "and") == TRUE &
                                        str_detect(honors, "Contract") == FALSE &
                                        str_detect(honors, "Studies") == FALSE,
                                      word(honors, -2, -1), NA)) %>%
+  #Find the first honors section by taking all but the last two words from the honors string
   mutate(first.honors = ifelse(str_detect(honors, "and") == TRUE &
                                  str_detect(honors, "Contract") == FALSE &
                                  str_detect(honors, "Studies") == FALSE,
                                word(honors, 1, -3), honors)) %>%
+  #Break first honors in to level and dept
   separate(first.honors, c("first.honors.level", "first.honors.dept"), sep = " in") %>%
+  #Drop "and"s
   mutate(first.honors.dept = ifelse(str_detect(honors, "and") == TRUE &
                                       str_detect(honors, "Contract") == FALSE &
                                       str_detect(honors, "Studies") == FALSE,
                                     gsub(" and", "", first.honors.dept), first.honors.dept)) %>%
   mutate(second.honors.dept = gsub("and ", "", second.honors.dept)) %>%
+  #Honors are always equal, set second honors level to first honors level
   mutate(second.honors.level = ifelse(is.na(second.honors.dept) == FALSE, first.honors.level, NA)) %>%
 
   select(-honors.id2, -honors.id3, -honors.id4, -honors.id5, -honors.id6, -honors.sum,
@@ -215,12 +224,14 @@ else {
 
   g <- file %>%
     mutate(last = sub(fixed("[,]", TRUE), "", last)) %>%
+    #break honors into first and second
     separate(honors, c("first.honors", "second.honors"), sep = "and h") %>%
+    #Break into dept and level
     separate(first.honors, c("first.honors.level", "first.honors.dept"), sep = " in") %>%
     separate(second.honors, c("second.honors.level", "second.honors.dept"), sep = " in") %>%
+    #Add the h that was dropped earlier
     mutate(second.honors.level = ifelse(is.na(second.honors.level) == FALSE,
                                         paste0("h", second.honors.level), second.honors.level)) %>%
-    mutate(grad.year = gradyear) %>%
     select(-honors.id2, -honors.id3, -honors.id4, -honors.id5, -honors.id6, -honors.sum,
            -split.wrong2, -split.wrong3, -split.wrong4, -split.wrong5, -split.wrong10, -sw.sum, -alpha)
 }
@@ -232,11 +243,13 @@ return(g)
 
 clean4 <- function(file, year){
 
-#' @title
-#' @description
-#' @param
-#' @return
-#' @usage
+#' @title Clean Data Part Four
+#' @description clean4() is the fourth part of the data cleaning series, it focuses on adding gender information.
+#' @param file A file that is the output of clean3(), a set of partially cleaned strings,
+  #' each a person in the Williams College Course Catalog.
+#' @param year The year after the course catalog came out, for the 1999-2000 catalog, the year would be "00", the same as the file
+#' @return clean4 returns completely cleaned dataset for a single year.
+#' @usage clean4("file", "year")
 #' @import dplyr gender
 #' @export
 
@@ -250,12 +263,12 @@ hby <- gradyear - 20
 h <- gender(g$first, c(lby,  hby), method = 'ssa')
 
 t <- gender(g$middle, c(lby, hby), method = 'ssa')
-
+#Get gender of first name
 i <- left_join(g, h, by = c("first" = "name"))%>%
     select(-year_min, -proportion_male, -proportion_female, -year_max) %>%
     unique() %>%
     rename(gender.first = gender)
-
+#Get gender of middle name, if no gender predicted by first name
 k <- left_join(i, t, by = c("middle" = "name"))%>%
     select(-year_min, -proportion_male, -proportion_female, -year_max) %>%
     unique() %>%

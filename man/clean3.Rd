@@ -4,18 +4,18 @@
 \alias{clean3}
 \title{Clean Data Part Three}
 \usage{
-clean3("00") gives partially cleaned entries from the Williams College Course Catalog.
+clean3("file", "year")
 }
 \arguments{
 \item{file}{A file that is the output of clean2(), a set of partially cleaned strings,
 each a person in the Williams College Course Catalog.}
 
-\item{year}{A year}
+\item{year}{The year after the course catalog came out, for the 1999-2000 catalog, the year would be "00", the same as the file.}
 }
 \value{
-clean3 returns partially cleaned data ready for clean2
+clean3 returns partially cleaned data ready for clean4
 }
 \description{
-clean3() is the third part of the data cleaning series, it focuses on departmental honors
+clean3() is the third part of the data cleaning series, it focuses on departmental honors.
 }
 

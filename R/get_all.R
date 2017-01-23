@@ -1,10 +1,10 @@
 getyr <- function(file) {
 
-#' @title
-#' @description
-#' @param
-#' @return
-#' @usage
+#' @title Get Year
+#' @description getyr combines all of the necesary functions and gives a complete data frame for a single year
+#' @param file The .pdf file to be converted to a data frame
+#' @return A complete data frame for a single year
+#' @usage getyr("file")
 #' @import dplyr
 #' @export
 
@@ -22,11 +22,11 @@ return(g)
 
 allyears <- function() {
 
-  #' @title
-  #' @description
-  #' @param
-  #' @return
-  #' @usage
+  #' @title All Years
+  #' @description allyrs runs getyr for all years and combines them into a single data frame
+  #' @return The complete data frame with all the information from the Williams College Course Catalog,
+  #' the same as the allyrs dataset
+  #' @usage allyears()
   #' @import dplyr
   #' @export
 

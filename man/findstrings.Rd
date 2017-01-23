@@ -4,7 +4,7 @@
 \alias{findstrings}
 \title{Find Strings}
 \usage{
-findstrings("00") cuts the 2000 catalog to just the graduated seniors mentioned in the document
+findstrings("file")
 }
 \arguments{
 \item{file}{The file, a Williams College Course Catalog, in .txt form, to be cut down to just the list of graduated seniors.}

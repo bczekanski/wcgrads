@@ -1,10 +1,9 @@
 initials <- function() {
 
-#' @title visual
-#' @description visual() makes a graphic showing the frequency of two variables and their marginal distributions.
-#' It is intended to be used to show distribution of initials
+#' @title Initials
+#' @description initials() makes a graphic showing the frequency of initials and the marginal distributions of first and last initials.
 #' @return A graph showing the joint and marginal distribution of initials
-#' @usage visual() shows...
+#' @usage initials()
 #' @export
 #' @import ggplot2 ggExtra dplyr
 

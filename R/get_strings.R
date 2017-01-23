@@ -5,7 +5,7 @@ pdf2txt <- function(file) {
 #' @param file The file, a Williams College Course Catalog, to be converted from pdf
 #' @return The output of pdftotxt is a txt version of the Williams College Course Catalog
 #' in the same location as the .pdf that it took as input.
-#' @usage pdf2txt("00") converts the pdf from 1999-2000 to txt
+#' @usage pdf2txt("file")
 #' @export
 
 pdftotext <- system.file("bin/pdftotext", package = "wcgrads", mustWork = TRUE)
@@ -23,7 +23,7 @@ findstrings <- function(file){
 #'  of the Catalog that is just list of graduating seniors.
 #' @param file The file, a Williams College Course Catalog, in .txt form, to be cut down to just the list of graduated seniors.
 #' @return findstrings(file) returns a tbl_df() of the section of the Williams College Course Catalog that contains the list of graduated seniors.
-#' @usage findstrings("00") cuts the 2000 catalog to just the graduated seniors mentioned in the document
+#' @usage findstrings("file")
 #' @export
 
 x <- read.delim(file, quote = "", stringsAsFactors = FALSE)
@@ -47,7 +47,7 @@ makestrings <- function(file){
 #' incomplete entries to form complete entries of graduating seniors
 #' @param file The file, a section Williams College Course Catalog, in .txt form. This section may not be complete lines.
 #' @return The output of makestrings is a tbl_df() of complete lines from the graduated seniors section of the Williams College Course Catalog.
-#' @usage makestrings("00") takes the output of findstrings("00") and gives complete lines from the Williams College Course Catalog.
+#' @usage makestrings("file")
 #' @import stringr dplyr
 #' @export
 

@@ -1,10 +1,9 @@
 gradcount <- function() {
 
-#' @title
-#' @description
-#' @param
-#' @return
-#' @usage
+#' @title Graduate Count
+#' @description gradcount gets the count of graduates each year and graphs the information
+#' @return A bar graph of graduating seniors by year
+#' @usage gradcount()
 #' @import dplyr gender
 #' @export
 
@@ -26,11 +25,10 @@ return(b)
 
 namelength <- function() {
 
-#' @title
-#' @description
-#' @param
-#' @return
-#' @usage
+#' @title Name Length
+#' @description namelength counts the number of letters in each name
+#' @return A data frame of all graduates with their name, the number of characters and their graduation year
+#' @usage namelength()
 #' @import dplyr stringr
 #' @export
 

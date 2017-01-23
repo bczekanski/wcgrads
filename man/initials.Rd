@@ -2,15 +2,14 @@
 % Please edit documentation in R/initials.R
 \name{initials}
 \alias{initials}
-\title{visual}
+\title{Initials}
 \usage{
-visual() shows...
+initials()
 }
 \value{
 A graph showing the joint and marginal distribution of initials
 }
 \description{
-visual() makes a graphic showing the frequency of two variables and their marginal distributions.
-It is intended to be used to show distribution of initials
+initials() makes a graphic showing the frequency of initials and the marginal distributions of first and last initials.
 }
 

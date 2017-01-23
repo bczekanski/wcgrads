@@ -4,7 +4,7 @@
 \alias{clean1}
 \title{Clean Data Part One}
 \usage{
-clean1("00") gives partially cleaned entries from the Williams College Course Catalog.
+clean1("file")
 }
 \arguments{
 \item{file}{A file that is the output of makestrings(), a set of complete strings,

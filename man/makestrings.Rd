@@ -4,7 +4,7 @@
 \alias{makestrings}
 \title{Make Strings}
 \usage{
-makestrings("00") takes the output of findstrings("00") and gives complete lines from the Williams College Course Catalog.
+makestrings("file")
 }
 \arguments{
 \item{file}{The file, a section Williams College Course Catalog, in .txt form. This section may not be complete lines.}

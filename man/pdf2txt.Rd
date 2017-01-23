@@ -4,7 +4,7 @@
 \alias{pdf2txt}
 \title{PDF to Text}
 \usage{
-pdf2txt("00") converts the pdf from 1999-2000 to txt
+pdf2txt("file")
 }
 \arguments{
 \item{file}{The file, a Williams College Course Catalog, to be converted from pdf}

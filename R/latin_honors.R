@@ -1,10 +1,9 @@
 latin_honors <- function(){
 
-#' @title
-#' @description
-#' @param
-#' @return
-#' @usage
+#' @title Latin Honors
+#' @description latin_honors shows the percentage of each graduating class that is awarded latin honors.
+#' @return A bar graph showing the percentage of each graduating class awarded each level of latin
+#' @usage latin_honors()
 #' @import dplyr ggplot2
 #' @export
 
@@ -16,7 +15,7 @@ a <- allyrs %>%
   group_by(grad.year) %>%
   mutate(yrly.count = sum(count)) %>%
   filter(is.na(latin.honors) == FALSE) %>%
-  mutate(yrly.pct = count/yrly.count)
+  mutate(yrly.pct = 100*count/yrly.count)
 
 z <- a %>%
   ggplot(aes(grad.year, yrly.pct, fill = latin.honors)) +
@@ -33,11 +32,11 @@ return(z)
 
 total_latin_honors <- function(){
 
-#' @title
-#' @description
-#' @param
-#' @return
-#' @usage
+#' @title Total Latin Honors
+#' @description total_latin_honors shows cumulative latin honors for comparison with guidelines given by the Williams College Faculty.
+#' @return A bar graph showing the percentage of each graduating class attaining at least each level of latin honors.
+#' There are also black lines that indicate the guidelines given in the Williams College Course Catalog.
+#' @usage total_latin_honors()
 #' @import dplyr ggplot2
 #' @export
 
@@ -49,14 +48,14 @@ b <- allyrs %>%
   group_by(grad.year) %>%
   mutate(yrly.count = sum(count)) %>%
   filter(is.na(latin.honors) == FALSE) %>%
-  mutate(yrly.pct = count/yrly.count) %>%
+  mutate(yrly.pct = 100*count/yrly.count) %>%
   mutate(yrly.pct = ifelse(latin.honors == "Magna Cum Laude", yrly.pct + lead(yrly.pct), yrly.pct)) %>%
   mutate(yrly.pct = ifelse(latin.honors == "Cum Laude", yrly.pct + lead(yrly.pct), yrly.pct))
 
 c <- b %>%
   ggplot(aes(grad.year, yrly.pct, fill = latin.honors)) +
   geom_bar(stat = "identity", position = "dodge") +
-  geom_hline(yintercept = c(.02, .15, .35)) +
+  geom_hline(yintercept = c(2, 15, 35)) +
   ggtitle("Cumulative Latin Honors") +
   xlab("Graduation Year") +
   ylab("Cumulative Percent Receiving Latin Honors") +
