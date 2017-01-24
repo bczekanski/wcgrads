@@ -18,5 +18,6 @@ Imports: knitr,
   dplyr,
   tidyr,
   stringr,
-  gender
+  gender,
+  genderdata
 VignetteBuilder: knitr
