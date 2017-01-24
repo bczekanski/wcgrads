@@ -1,8 +1,8 @@
 ---
 title: Williams College Graduates
-author:
-name:  Ben Czekanski
-affiliation:  Middlebury College '18
+author: 
+name: Ben Czekanski
+affiliation: Middlebury College '18
 email:  bczekanski@middlebury.edu
 
 abstract: >
