@@ -1,10 +1,15 @@
 ---
-title: "Williams College Graduates"
-author: "Ben Czekanski, Middlebury '18"
-date: "January 23, 2017"
-output: 
-  pdf_document
+title: Williams College Graduates
+author:
+name:  Ben Czekanski
+affiliation:  Middlebury College '18
+email:  bczekanski@middlebury.edu
+
+abstract: >
+  This package cleans and examines data found in Williams College Course Catalogs about graduating seniors from 2000-2016. The data in this package includes the names, graduation years and predicted genders of graduates, as well as information about latin and departmental honors. In addition to the data __wcgrads__ provides examples of interesting analyses of the data as examples for users.
+output: pdf_document
 ---
+
 
 #Introduction
 
@@ -30,7 +35,7 @@ head(names, 10)
 
 Next we can answer the question "How has the number of graduating seniors changed over time?". The gradcount() function can answer this question easily by provinding a graph showing the change over time.
 
-```{r warning = FALSE}
+```{r fig.width = 5, fig.height = 3, warning = FALSE}
 library(wcgrads)
 gradcount()
 ```
@@ -53,9 +58,20 @@ The total_latin_honors() function shows the percentage distributions of cumulati
 library(wcgrads)
 total_latin_honors()
 ```
+A simple investigation into how Phi Beta Kappa has been awarded over time reveal that between twelve and thirteen percent of students graduate Phi Beta Kappa, and that level has stayed fairly constant, with some variation.
+
+```{r fig.width = 5, fig.height = 3, warning = FALSE}
+library(wcgrads)
+pbk()
+```
+Two of the remaining unused variables in the allyrs dataset are departmental honors and predicted gender. The dept_honors() function gives a chart that shows the raw number of graduates with honors from each department, and their gender skew. Again, it is important to note that this is predicted gender, but the figure still likely gives an approximation of the makeup of each department. Biology has the most graduates with some level of honors, and it appears that Mathematics is the most skewed by gender among those receiving honors.
+```{r warning = FALSE}
+library(wcgrads)
+dept_honors()
+```
 
 A final, somewhat more trivial analysis of the data involves the distribution of initials. The initials() function performs this analysis and shows both the joint and marginal distribution of initials. Looking at the plot generated, we see several main trends. First, the distribution of last initials appears to be much more even than the distribution of first initials. This suggests that there may be some letters that are more popular than others. When given the choice of first initial, letters A-E, J-N, and R-T are given more than other letters. This could also simply be because there are more options for first names that start with these initials. The difference between first and last initals appears to be greatest in F-H and W, which all occur as last initials much more often than they do as first initials. Another interesting aspect of the graphic is observing which first initials are more or less popular given a last initial. For example, L and K occur as last initials at a similar rate. However, the pairing CL occurs much more frequently than the pairing CK, possibly due to avoidance of alliteration. Inversely, while E and K occur about as frequently as first names, EC occurs much more than KC. The plot offers the opportunity to make many other observations, and I invite the reader to explore them. Further advancements on this subject could include showing change over time, further breakdown by name, or breaking this down by sound rather than letter to further examine how sound affects name choice.
-```{r fig.width=7, fig.height=6, warning = FALSE}
+```{r warning = FALSE}
 library(wcgrads)
 initials()
 ```

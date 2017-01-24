@@ -2,7 +2,7 @@ latin_honors <- function(){
 
 #' @title Latin Honors
 #' @description latin_honors shows the percentage of each graduating class that is awarded latin honors.
-#' @return A bar graph showing the percentage of each graduating class awarded each level of latin
+#' @return A bar graph showing the percentage of each graduating class awarded each level of latin honors.
 #' @usage latin_honors()
 #' @import dplyr ggplot2
 #' @export
@@ -23,7 +23,10 @@ z <- a %>%
      ggtitle("Latin Honors") +
      xlab("Graduation Year") +
      ylab("Percent Receiving Latin Honors") +
-     guides(fill = guide_legend(title = "Honors Level"))
+     guides(fill = guide_legend(title = "Honors Level")) +
+     labs(caption = "The percentages of graduating seniors who received each level
+           of latin honors. There is no overall trend but they seem to be related
+          in their variation, due to the phrase 'at least' in the guidelines.")
 
 
 return(z)
@@ -59,7 +62,10 @@ c <- b %>%
   ggtitle("Cumulative Latin Honors") +
   xlab("Graduation Year") +
   ylab("Cumulative Percent Receiving Latin Honors") +
-  guides(fill = guide_legend(title = "Honors Level"))
+  guides(fill = guide_legend(title = "Honors Level")) +
+  labs(caption = "This figure shows the percentage of seniors that received at least each
+level of latin honors.These levels are compared to the guidelines set forth in the Course
+       Catalogs, which are denoted by the black lines.")
 
 
 return(c)

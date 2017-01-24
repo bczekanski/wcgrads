@@ -7,7 +7,7 @@
 latin_honors()
 }
 \value{
-A bar graph showing the percentage of each graduating class awarded each level of latin
+A bar graph showing the percentage of each graduating class awarded each level of latin honors.
 }
 \description{
 latin_honors shows the percentage of each graduating class that is awarded latin honors.

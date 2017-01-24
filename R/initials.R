@@ -24,7 +24,10 @@ a <- u %>%
   scale_x_discrete(position = "top") +
   scale_y_discrete(position = "right") +
   theme(axis.ticks.x = element_blank()) +
-  theme(axis.ticks.y = element_blank())
+  theme(axis.ticks.y = element_blank()) +
+  labs(caption = "This figure shows the distribution of first and last initials among
+                 Williams College Graduates. A and J are the most popular first initials
+                  while S appears to be the most frequent last initial.")
 
 #Add Marginal Plots
 

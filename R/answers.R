@@ -4,7 +4,7 @@ gradcount <- function() {
 #' @description gradcount gets the count of graduates each year and graphs the information
 #' @return A bar graph of graduating seniors by year
 #' @usage gradcount()
-#' @import dplyr gender
+#' @import dplyr gender ggplot2
 #' @export
 
 a <- allyrs %>%
@@ -16,7 +16,9 @@ b <- a %>%
   geom_bar(stat = "identity", position = "dodge") +
   ggtitle("Graduating Seniors Over Time") +
   xlab("Graduation Year") +
-  ylab("Graduating Seniors")
+  ylab("Graduating Seniors") +
+  labs(caption = "This chart shows the raw number of graduates from Williams College, by year.
+       2000 had the most graduates while 2005 had the fewest graduates. ")
 
 
 return(b)

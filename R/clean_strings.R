@@ -180,7 +180,7 @@ g <- file %>%
   #Drop the comma still attached to some last names
   mutate(last = sub(fixed("[,]", TRUE), "", last)) %>%
   #Break up dual departmental honors into two
-  separate(honors, c("first.honors", "second.honors"), sep = "and with") %>%
+  separate(honors, c("first.honors", "second.honors"), sep = " and with") %>%
   #Break into department and level
   separate(first.honors, c("first.honors.level", "first.honors.dept"), sep = " in") %>%
   separate(second.honors, c("second.honors.level", "second.honors.dept"), sep = " in") %>%
@@ -225,7 +225,7 @@ else {
   g <- file %>%
     mutate(last = sub(fixed("[,]", TRUE), "", last)) %>%
     #break honors into first and second
-    separate(honors, c("first.honors", "second.honors"), sep = "and h") %>%
+    separate(honors, c("first.honors", "second.honors"), sep = " and h") %>%
     #Break into dept and level
     separate(first.honors, c("first.honors.level", "first.honors.dept"), sep = " in") %>%
     separate(second.honors, c("second.honors.level", "second.honors.dept"), sep = " in") %>%
