@@ -4,7 +4,7 @@ gradcount <- function() {
 #' @description gradcount gets the count of graduates each year and graphs the information
 #' @return A bar graph of graduating seniors by year
 #' @usage gradcount()
-#' @import dplyr gender ggplot2
+#' @import dplyr ggplot2
 #' @export
 
 a <- allyrs %>%

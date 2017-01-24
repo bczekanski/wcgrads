@@ -251,7 +251,7 @@ clean4 <- function(file, year){
 #' @param year The year after the course catalog came out, for the 1999-2000 catalog, the year would be "00", the same as the file
 #' @return clean4 returns completely cleaned dataset for a single year.
 #' @usage clean4("file", "year")
-#' @import dplyr gender genderdata
+#' @import dplyr gender
 #' @export
 
 g <- file
