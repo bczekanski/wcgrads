@@ -7,17 +7,16 @@ Author: person("Ben", "Czekanski", email = "bczekanski@gmail.com",
 Maintainer: Ben Czekanski <bmczekanski@gmail.com>
 License: CC0
 Description: This package cleans and examines data found in Williams College Course Catalogs about graduating seniors from 2000-2016.
-Depends: R (>= 3.1.2),
-  knitr,
-  rmarkdown,
-  testthat (>= 1.0.2),
-  ggplot2,
+Depends: R (>= 3.1.2)
+LazyData: TRUE
+RoxygenNote: 5.0.1
+Imports:ggplot2,
   ggExtra (>= 0.6),
   dplyr (>= 0.5.0),
   tidyr,
   stringr,
   gender
-LazyData: TRUE
-RoxygenNote: 5.0.1
-Imports: 
+Suggests: knitr,
+  rmarkdown,
+  testthat (>= 1.0.2),
 VignetteBuilder: knitr
