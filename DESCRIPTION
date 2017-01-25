@@ -12,11 +12,10 @@ LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports: knitr,
   rmarkdown,
-  testthat,
+  testthat (>= 1.0.2),
   ggplot2,
-  ggExtra,
+  ggExtra (>= 0.6),
   dplyr (>= 0.5.0),
-  DBI,
   tidyr,
   stringr,
   gender
