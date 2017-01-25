@@ -10,7 +10,7 @@ Description: This package cleans and examines data found in Williams College Cou
 Depends: R (>= 3.1.2)
 LazyData: TRUE
 RoxygenNote: 5.0.1
-Suggests: knitr,
+Imports: knitr,
   rmarkdown,
   testthat,
   ggplot2,
