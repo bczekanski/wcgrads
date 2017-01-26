@@ -7,7 +7,8 @@ email:  bczekanski@middlebury.edu
 
 abstract: >
   This package cleans and examines data found in Williams College Course Catalogs about graduating seniors from 2000-2016. The data in this package includes the names, graduation years and predicted genders of graduates, as well as information about latin and departmental honors. In addition to the data __wcgrads__ provides examples of interesting analyses of the data as examples for users.
-output: pdf_document
+output: html_document
+runtime: shiny
 ---
 
 
@@ -79,3 +80,57 @@ initials()
 
 #Conclusion
 The __wcgrads__ package uses the "allyrs" data to answer a number of questions, both important and trivial about Williams College graduates. The limited analyses included in the package also raise interesting questions ranging from how names are chosen to how the College handles ties in GPA when awarding latin honors. More important than any question it asks or answers, __wcgrads__ makes information buried in the Williams College Course Catalog easily available to anyone who wants to analyze it. 
+
+
+
+```{r echo = FALSE, warning = FALSE}
+library(dplyr)
+library(ggplot2)
+      selectInput("select", label = h4("Chart Type"), 
+                  choices = list("In Year" = 1, "Through Year" = 2), selected = 1)
+      sliderInput("year", "Grad Year", min = 2000, max = 2016, value = 1)
+
+ renderPlot({
+   
+   if(input$select == 1){
+   
+      a <- allyrs %>%
+      filter(grad.year == input$year) %>%
+      select(latin.honors, gender) %>%
+      group_by(latin.honors, gender) %>%
+      summarize(count = n())
+      
+      z <- a %>%
+        ggplot(aes(latin.honors, count, fill = gender)) +
+          geom_bar(stat = "identity", position = "dodge") +
+          ggtitle("Latin Honors and Gender") +
+          xlab("Latin Honors") +
+          ylab("Number of Gaduates") +
+          guides(fill = guide_legend(title = "Gender")) +
+          labs(caption = "caption here") +
+          ylim(0, 200)
+      z
+   }
+    else{
+      a <- allyrs %>%
+      filter(grad.year <= input$year) %>%
+      select(latin.honors, gender) %>%
+      group_by(latin.honors, gender) %>%
+      summarize(count = n())
+
+      z <- a %>%
+        ggplot(aes(latin.honors, count, fill = gender)) +
+          geom_bar(stat = "identity", position = "dodge") +
+          ggtitle("Latin Honors and Gender") +
+          xlab("Latin Honors") +
+          ylab("Number of Gaduates") +
+          guides(fill = guide_legend(title = "Gender")) +
+          labs(caption = "caption here") +
+          ylim(0, 3000)
+      z
+      }
+  })
+
+
+```
+
