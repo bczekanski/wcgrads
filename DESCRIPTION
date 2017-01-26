@@ -17,7 +17,7 @@ Imports:  assertthat,
   DBI,
   dichromat,
   dplyr,
-  gender
+  gender,
   ggExtra,
   ggplot2,
   gtable,
