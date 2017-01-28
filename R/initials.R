@@ -16,8 +16,8 @@ u <- allyrs %>%
 a <- u %>%
   ggplot(aes(firstinit, lastinit)) +
   geom_bin2d() +
-  scale_fill_gradient2() +
-  theme(panel.background = element_rect(fill = 'white', colour = 'white'), legend.position = "left") +
+  scale_fill_gradient2(low = "white", high = "#512698") +
+  theme(panel.background = element_rect(fill = 'white', colour = "white"), legend.position = "left") +
   ylab("Last Initial") +
   xlab("First Initial") +
   ggtitle("Initials of Williams College Graduates (2000-2016)") +
@@ -31,7 +31,8 @@ a <- u %>%
 
 #Add Marginal Plots
 
-b <- ggMarginal(a, u, u$firstinit, u$lastinit, type = "histogram", margins = "both", stat = "count", xparams = list(labels = TRUE))
+b <- ggMarginal(a, u, u$firstinit, u$lastinit, type = "histogram", margins = "both", stat = "count",
+                color = "#512698", fill = "#fdcc09", xparams = list(labels = TRUE))
 
 return(b)
 

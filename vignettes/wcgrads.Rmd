@@ -45,6 +45,7 @@ Yet another question that the allyrs data allows us to answer is "How has the di
 library(wcgrads)
 latin_honors()
 ```
+
 Delving further into latin honors, we find that the following in the Course Catalogs:
 
 "The Faculty will recommend to the Trustees that the degree of Bachelor of Arts with distinction be conferred
@@ -71,24 +72,15 @@ library(wcgrads)
 dept_honors()
 ```
 
-A final, somewhat more trivial analysis of the data involves the distribution of initials. The initials() function performs this analysis and shows both the joint and marginal distribution of initials. Looking at the plot generated, we see several main trends. First, the distribution of last initials appears to be much more even than the distribution of first initials. This suggests that there may be some letters that are more popular than others. When given the choice of first initial, letters A-E, J-N, and R-T are given more than other letters. This could also simply be because there are more options for first names that start with these initials. The difference between first and last initals appears to be greatest in F-H and W, which all occur as last initials much more often than they do as first initials. Another interesting aspect of the graphic is observing which first initials are more or less popular given a last initial. For example, L and K occur as last initials at a similar rate. However, the pairing CL occurs much more frequently than the pairing CK, possibly due to avoidance of alliteration. Inversely, while E and K occur about as frequently as first names, EC occurs much more than KC. The plot offers the opportunity to make many other observations, and I invite the reader to explore them. Further advancements on this subject could include showing change over time, further breakdown by name, or breaking this down by sound rather than letter to further examine how sound affects name choice.
-```{r warning = FALSE}
-library(wcgrads)
-initials()
-```
----
 
-#Conclusion
-The __wcgrads__ package uses the "allyrs" data to answer a number of questions, both important and trivial about Williams College graduates. The limited analyses included in the package also raise interesting questions ranging from how names are chosen to how the College handles ties in GPA when awarding latin honors. More important than any question it asks or answers, __wcgrads__ makes information buried in the Williams College Course Catalog easily available to anyone who wants to analyze it. 
-
-
+In addition to the departmental honors and gender, __wcgrads__ provides data about latin honors and gender. 
 
 ```{r echo = FALSE, warning = FALSE}
 library(dplyr)
 library(ggplot2)
-      selectInput("select", label = h4("Chart Type"), 
-                  choices = list("In Year" = 1, "Through Year" = 2), selected = 1)
-      sliderInput("year", "Grad Year", min = 2000, max = 2016, value = 1)
+      selectInput("select", label = ("Chart Type"), 
+                  choices = list("In Year" = 1, "Through Year" = 2), selected = 2)
+      sliderInput("year", "Grad Year", min = 2000, max = 2016, value = 2016, sep = "")
 
  renderPlot({
    
@@ -97,6 +89,7 @@ library(ggplot2)
       a <- allyrs %>%
       filter(grad.year == input$year) %>%
       select(latin.honors, gender) %>%
+      mutate(latin.honors = ifelse(is.na(latin.honors) == TRUE, "None", latin.honors)) %>%
       group_by(latin.honors, gender) %>%
       summarize(count = n())
       
@@ -108,13 +101,15 @@ library(ggplot2)
           ylab("Number of Gaduates") +
           guides(fill = guide_legend(title = "Gender")) +
           labs(caption = "caption here") +
-          ylim(0, 200)
+          ylim(0, 200) +
+          scale_fill_manual(values = c("#512698", "#fdcc09"), na.value="dimgray")
       z
    }
     else{
       a <- allyrs %>%
       filter(grad.year <= input$year) %>%
       select(latin.honors, gender) %>%
+      mutate(latin.honors = ifelse(is.na(latin.honors) == TRUE, "None", latin.honors)) %>%
       group_by(latin.honors, gender) %>%
       summarize(count = n())
 
@@ -123,10 +118,11 @@ library(ggplot2)
           geom_bar(stat = "identity", position = "dodge") +
           ggtitle("Latin Honors and Gender") +
           xlab("Latin Honors") +
-          ylab("Number of Gaduates") +
+          ylab("Number of Graduates") +
           guides(fill = guide_legend(title = "Gender")) +
           labs(caption = "caption here") +
-          ylim(0, 3000)
+          ylim(0, 3000) +
+          scale_fill_manual(values = c("#512698", "#fdcc09"), na.value="dimgray")
       z
       }
   })
@@ -134,3 +130,12 @@ library(ggplot2)
 
 ```
 
+A final, somewhat more trivial analysis of the data involves the distribution of initials. The initials() function performs this analysis and shows both the joint and marginal distribution of initials. Looking at the plot generated, we see several main trends. First, the distribution of last initials appears to be much more even than the distribution of first initials. This suggests that there may be some letters that are more popular than others. When given the choice of first initial, letters A-E, J-N, and R-T are given more than other letters. This could also simply be because there are more options for first names that start with these initials. The difference between first and last initals appears to be greatest in F-H and W, which all occur as last initials much more often than they do as first initials. Another interesting aspect of the graphic is observing which first initials are more or less popular given a last initial. For example, L and K occur as last initials at a similar rate. However, the pairing CL occurs much more frequently than the pairing CK, possibly due to avoidance of alliteration. Inversely, while E and K occur about as frequently as first names, EC occurs much more than KC. The plot offers the opportunity to make many other observations, and I invite the reader to explore them. Further advancements on this subject could include showing change over time, further breakdown by name, or breaking this down by sound rather than letter to further examine how sound affects name choice.
+```{r warning = FALSE}
+library(wcgrads)
+initials()
+```
+---
+
+#Conclusion
+The __wcgrads__ package uses the "allyrs" data to answer a number of questions, both important and trivial about Williams College graduates. The limited analyses included in the package also raise interesting questions ranging from how names are chosen to how the College handles ties in GPA when awarding latin honors. More important than any question it asks or answers, __wcgrads__ makes information buried in the Williams College Course Catalog easily available to anyone who wants to analyze it. 

@@ -72,8 +72,40 @@ d <- c %>%
     ylab("Number of Graduates") +
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
     labs(caption = "Total number of graduates earning some level of departmental honors, by major.
-         Gender is predicted from the R gender package.")
+         Gender is predicted from the R gender package.") +
+    scale_fill_manual(values = c("#512698", "#fdcc09"), na.value="dimgray")
 
 return(d)
 
+}
+
+latin_honors_gender <- function(){
+
+  #' @title Latin Honors and Gender
+  #' @description latin_honors_gender shows the total number of students of each predicted gender
+  #'  who received each level of latin honors.
+  #' @return A bar graph showing the total number of students of each predicted gender
+  #'  who received each level of latin honors.
+  #' @usage latin_honors_gender()
+  #' @import dplyr ggplot2
+  #' @export
+
+  a <- allyrs %>%
+    select(latin.honors, gender) %>%
+    mutate(latin.honors = ifelse(is.na(latin.honors) == TRUE, "None", latin.honors)) %>%
+    group_by(latin.honors, gender) %>%
+    summarize(count = n())
+
+  z <- a %>%
+    ggplot(aes(latin.honors, count, fill = gender)) +
+    geom_bar(stat = "identity", position = "dodge") +
+    ggtitle("Latin Honors and Gender") +
+    xlab("Latin Honors") +
+    ylab("Number of Graduates") +
+    guides(fill = guide_legend(title = "Gender")) +
+    labs(caption = "caption here") +
+    ylim(0, 3000) +
+    scale_fill_manual(values = c("#512698", "#fdcc09"), na.value="dimgray")
+
+  return(z)
 }
