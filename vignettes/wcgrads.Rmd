@@ -73,7 +73,7 @@ dept_honors()
 ```
 
 
-In addition to the departmental honors and gender, __wcgrads__ provides data about latin honors and gender. 
+In addition to the departmental honors and gender, __wcgrads__ provides data about latin honors and gender. We can see that over this time period slightly more men earned Summa Cum Laude than women, while a few more women than men acheived Magna Cum Laude. The differences for Cum Laude and no honors is much more. Significantly more women than men earned Cum Laude, while more men than women did not earn latin honors. From this chart we can infer that the average woman has a higher GPA than the average man. However, at the Magna Cum Laude and Summa Cum Laude levels, there are only minor differences, which suggests the variance of male GPAs is larger than females'.
 
 ```{r echo = FALSE, warning = FALSE}
 library(dplyr)
@@ -100,7 +100,7 @@ library(ggplot2)
           xlab("Latin Honors") +
           ylab("Number of Gaduates") +
           guides(fill = guide_legend(title = "Gender")) +
-          labs(caption = "caption here") +
+          labs(caption = "The number of students of each gender acheiving each level of latin honors.") +
           ylim(0, 200) +
           scale_fill_manual(values = c("#512698", "#fdcc09"), na.value="dimgray")
       z
@@ -120,7 +120,7 @@ library(ggplot2)
           xlab("Latin Honors") +
           ylab("Number of Graduates") +
           guides(fill = guide_legend(title = "Gender")) +
-          labs(caption = "caption here") +
+          labs(caption = "The number of students of each gender acheiving each level of latin honors.") +
           ylim(0, 3000) +
           scale_fill_manual(values = c("#512698", "#fdcc09"), na.value="dimgray")
       z
@@ -131,6 +131,7 @@ library(ggplot2)
 ```
 
 A final, somewhat more trivial analysis of the data involves the distribution of initials. The initials() function performs this analysis and shows both the joint and marginal distribution of initials. Looking at the plot generated, we see several main trends. First, the distribution of last initials appears to be much more even than the distribution of first initials. This suggests that there may be some letters that are more popular than others. When given the choice of first initial, letters A-E, J-N, and R-T are given more than other letters. This could also simply be because there are more options for first names that start with these initials. The difference between first and last initals appears to be greatest in F-H and W, which all occur as last initials much more often than they do as first initials. Another interesting aspect of the graphic is observing which first initials are more or less popular given a last initial. For example, L and K occur as last initials at a similar rate. However, the pairing CL occurs much more frequently than the pairing CK, possibly due to avoidance of alliteration. Inversely, while E and K occur about as frequently as first names, EC occurs much more than KC. The plot offers the opportunity to make many other observations, and I invite the reader to explore them. Further advancements on this subject could include showing change over time, further breakdown by name, or breaking this down by sound rather than letter to further examine how sound affects name choice.
+
 ```{r warning = FALSE}
 library(wcgrads)
 initials()

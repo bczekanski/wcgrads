@@ -103,7 +103,7 @@ latin_honors_gender <- function(){
     xlab("Latin Honors") +
     ylab("Number of Graduates") +
     guides(fill = guide_legend(title = "Gender")) +
-    labs(caption = "caption here") +
+    labs(caption = "The number of students of each gender acheiving each level of latin honors.") +
     ylim(0, 3000) +
     scale_fill_manual(values = c("#512698", "#fdcc09"), na.value="dimgray")
 

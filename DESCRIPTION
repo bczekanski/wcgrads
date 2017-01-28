@@ -9,6 +9,7 @@ License: CC0
 Description: This package cleans and examines data found in Williams College Course Catalogs about graduating seniors from 2000-2016.
 LazyData: TRUE
 RoxygenNote: 5.0.1
+Depends: R (>= 2.10) 
 Imports:  assertthat,
   colorspace,
   colourpicker,
@@ -49,4 +50,6 @@ Imports:  assertthat,
   tidyr,
   xtable,
   yaml
+Suggests:  knitr,
+  testthat
 VignetteBuilder: knitr
