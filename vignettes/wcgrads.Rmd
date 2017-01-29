@@ -1,5 +1,6 @@
 ---
 title: Williams College Graduates
+date: "`r Sys.Date()`"
 author: 
 name: Ben Czekanski
 affiliation: Middlebury College '18
@@ -7,6 +8,8 @@ email:  bczekanski@middlebury.edu
 
 abstract: >
   This package cleans and examines data found in Williams College Course Catalogs about graduating seniors from 2000-2016. The data in this package includes the names, graduation years and predicted genders of graduates, as well as information about latin and departmental honors. In addition to the data __wcgrads__ provides examples of interesting analyses of the data as examples for users.
+vignette: >
+  %\VignetteIndexEntry{sdfvb}
 output: html_document
 runtime: shiny
 ---
@@ -76,23 +79,25 @@ dept_honors()
 In addition to the departmental honors and gender, __wcgrads__ provides data about latin honors and gender. We can see that over this time period slightly more men earned Summa Cum Laude than women, while a few more women than men acheived Magna Cum Laude. The differences for Cum Laude and no honors is much more. Significantly more women than men earned Cum Laude, while more men than women did not earn latin honors. From this chart we can infer that the average woman has a higher GPA than the average man. However, at the Magna Cum Laude and Summa Cum Laude levels, there are only minor differences, which suggests the variance of male GPAs is larger than females'.
 
 ```{r echo = FALSE, warning = FALSE}
+library(wcgrads)
+#latin_honors_gender()
 library(dplyr)
 library(ggplot2)
-      selectInput("select", label = ("Chart Type"), 
+      selectInput("select", label = ("Chart Type"),
                   choices = list("In Year" = 1, "Through Year" = 2), selected = 2)
       sliderInput("year", "Grad Year", min = 2000, max = 2016, value = 2016, sep = "")
 
  renderPlot({
-   
+
    if(input$select == 1){
-   
+
       a <- allyrs %>%
       filter(grad.year == input$year) %>%
       select(latin.honors, gender) %>%
       mutate(latin.honors = ifelse(is.na(latin.honors) == TRUE, "None", latin.honors)) %>%
       group_by(latin.honors, gender) %>%
       summarize(count = n())
-      
+
       z <- a %>%
         ggplot(aes(latin.honors, count, fill = gender)) +
           geom_bar(stat = "identity", position = "dodge") +
