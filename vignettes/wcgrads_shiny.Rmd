@@ -1,8 +1,7 @@
 ---
 title: Williams College Graduates
 date: "`r Sys.Date()`"
-author: 
-name: Ben Czekanski
+author: Ben Czekanski
 affiliation: Middlebury College '18
 email:  bczekanski@middlebury.edu
 
