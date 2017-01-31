@@ -1,10 +1,9 @@
 ---
 title: Williams College Graduates
 date: "`r Sys.Date()`"
-author:
-  name: Ben Czekanski
-  affiliation: Middlebury College '18
-  email:  bczekanski@middlebury.edu
+author: Ben Czekanski
+affiliation: Middlebury College '18
+email:  bczekanski@middlebury.edu
 
 abstract: >
   This package cleans and examines data found in Williams College Course Catalogs about graduating seniors from 2000-2016. The data in this package includes the names, graduation years and predicted genders of graduates, as well as information about latin and departmental honors. In addition to the data __wcgrads__ provides examples of interesting analyses of the data as examples for users.
@@ -12,7 +11,7 @@ vignette: >
   %\VignetteIndexEntry{wcgrads}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
-output: rticles::rjournal_article
+output: pdf_document
 ---
 
 

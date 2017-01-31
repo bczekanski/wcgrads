@@ -99,7 +99,7 @@ latin_honors_gender <- function(){
   z <- a %>%
     ggplot(aes(latin.honors, count, fill = gender)) +
     geom_bar(stat = "identity", position = "dodge") +
-    ggtitle("Latin Honors and Gender") +
+    ggtitle("Latin Honors and Gender 2000-2016") +
     xlab("Latin Honors") +
     ylab("Number of Graduates") +
     guides(fill = guide_legend(title = "Gender")) +
