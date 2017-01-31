@@ -65,8 +65,8 @@ c <- b %>%
   ylab("Cumulative Percent Receiving Latin Honors") +
   guides(fill = guide_legend(title = "Honors Level")) +
   labs(caption = "This figure shows the percentage of seniors that received at least each
-level of latin honors.These levels are compared to the guidelines set forth in the Course
-       Catalogs, which are denoted by the black lines.") +
+level of latin honors.These levels are compared to the guidelines set forth 
+in the Course Catalogs, which are denoted by the black lines.") +
   scale_fill_manual(values = c("#512698", "#fdcc09", "dimgray"))
 
 

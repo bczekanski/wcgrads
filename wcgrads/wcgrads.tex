@@ -168,6 +168,25 @@ dept_honors()
 
 \includegraphics{wcgrads_files/figure-latex/unnamed-chunk-6-1} \end{Schunk}
 
+In addition to the departmental honors and gender, \textbf{wcgrads}
+provides data about latin honors and gender. We can see that over this
+time period slightly more men earned Summa Cum Laude than women, while a
+few more women than men acheived Magna Cum Laude. The differences for
+Cum Laude and no honors is much more. Significantly more women than men
+earned Cum Laude, while more men than women did not earn latin honors.
+From this chart we can infer that the average woman has a higher GPA
+than the average man. However, at the Magna Cum Laude and Summa Cum
+Laude levels, there are only minor differences, which suggests the
+variance of male GPAs is larger than females'.
+
+\begin{Schunk}
+\begin{Sinput}
+library(wcgrads)
+latin_honors_gender()
+\end{Sinput}
+
+\includegraphics{wcgrads_files/figure-latex/unnamed-chunk-7-1} \end{Schunk}
+
 A final, somewhat more trivial analysis of the data involves the
 distribution of initials. The initials() function performs this analysis
 and shows both the joint and marginal distribution of initials. Looking
@@ -198,7 +217,7 @@ library(wcgrads)
 initials()
 \end{Sinput}
 
-\includegraphics{wcgrads_files/figure-latex/unnamed-chunk-7-1} \end{Schunk}
+\includegraphics{wcgrads_files/figure-latex/unnamed-chunk-8-1} \end{Schunk}
 
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
@@ -215,8 +234,8 @@ who wants to analyze it.
 
 \address{%
 Ben Czekanski\\
-\\
+Middlebury College '18\\
 \\
 }
-
+\href{mailto:bczekanski@middlebury.edu}{\nolinkurl{bczekanski@middlebury.edu}}
 
