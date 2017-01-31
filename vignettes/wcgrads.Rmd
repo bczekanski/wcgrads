@@ -43,6 +43,7 @@ Next we can answer the question "How has the number of graduating seniors change
 library(wcgrads)
 gradcount()
 ```
+
 Yet another question that the allyrs data allows us to answer is "How has the distribution of latin honors changed over time?". __wcgrads__ has a function for that as well. latin_honors() shows the percentage of students that received each level of latin honors by year. There is no general trend, but there is a decent amount of variation. Perhaps the variation can be explained by equal GPA's and the methodology used in the case of such ties.
 ```{r warning = FALSE}
 library(wcgrads)
@@ -63,12 +64,14 @@ The total_latin_honors() function shows the percentage distributions of cumulati
 library(wcgrads)
 total_latin_honors()
 ```
+
 A simple investigation into how Phi Beta Kappa has been awarded over time reveal that between twelve and thirteen percent of students graduate Phi Beta Kappa, and that level has stayed fairly constant, with some variation.
 
 ```{r fig.width = 5, fig.height = 3, warning = FALSE}
 library(wcgrads)
 pbk()
 ```
+
 Two of the remaining unused variables in the allyrs dataset are departmental honors and predicted gender. The dept_honors() function gives a chart that shows the raw number of graduates with honors from each department, and their gender skew. Again, it is important to note that this is predicted gender, but the figure still likely gives an approximation of the makeup of each department. Biology has the most graduates with some level of honors, and it appears that Mathematics is the most skewed by gender among those receiving honors.
 ```{r warning = FALSE}
 library(wcgrads)
