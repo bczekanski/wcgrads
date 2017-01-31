@@ -26,6 +26,7 @@ Imports: assertthat,
   httpuv,
   httr,
   jsonlite,
+  knitr,
   labeling,
   lazyeval,
   magrittr,
@@ -49,7 +50,7 @@ Imports: assertthat,
   tidyr,
   xtable,
   yaml
-Suggests: knitr,
+Suggests:
   testthat,
-    rmarkdown
+  rmarkdown
 VignetteBuilder: knitr
