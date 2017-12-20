@@ -18,7 +18,8 @@ b <- a %>%
   xlab("Graduation Year") +
   ylab("Graduating Seniors") +
   labs(caption = "This chart shows the raw number of graduates from Williams College, by year.
-       2000 had the most graduates while 2005 had the fewest graduates. ")
+       2000 had the most graduates while 2005 had the fewest graduates. ") +
+  theme_bw()
 
 
 return(b)
