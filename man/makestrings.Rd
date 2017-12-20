@@ -16,4 +16,3 @@ The output of makestrings is a tbl_df() of complete lines from the graduated sen
 makestrings() takes the list of names given by findstrings() and combines
 incomplete entries to form complete entries of graduating seniors
 }
-

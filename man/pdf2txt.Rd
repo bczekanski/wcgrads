@@ -16,4 +16,3 @@ in the same location as the .pdf that it took as input.
 \description{
 pdf2txt() converts Williams College Course Catalogs from .pdf to .txt
 }
-

@@ -12,4 +12,3 @@ A data frame of all graduates with their name, the number of characters and thei
 \description{
 namelength counts the number of letters in each name
 }
-

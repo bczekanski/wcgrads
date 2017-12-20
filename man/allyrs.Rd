@@ -30,4 +30,3 @@ allyrs
 A dataset containing information from Williams College Course Catalogs from 2000-2016. Each row is a single graduate.
 }
 \keyword{datasets}
-

@@ -15,4 +15,3 @@ A complete data frame for a single year
 \description{
 getyr combines all of the necesary functions and gives a complete data frame for a single year
 }
-

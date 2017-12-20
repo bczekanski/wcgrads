@@ -17,4 +17,3 @@ clean2 returns partially cleaned data ready for clean3
 clean2() is the second part of the data cleaning series, it focuses on correcting last names that have spaces
 and have been read incorrectly as a result.
 }
-

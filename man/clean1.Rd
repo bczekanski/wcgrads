@@ -16,4 +16,3 @@ clean1 returns partially cleaned data ready for clean2
 \description{
 clean1() is the first part of the data cleaning series
 }
-

@@ -4,6 +4,8 @@
 \name{wcgrads}
 \alias{wcgrads}
 \alias{wcgrads-package}
+\alias{wcgrads}
+\alias{wcgrads-package}
 \title{wcgrads.}
 \description{
 wcgrads.
@@ -15,4 +17,3 @@ The Williams College Course Catalog is published as a PDF document.
 wcgrads converts that data into a readable dataframe.
 The dataframe and sample analyses are then made available to package users.
 }
-

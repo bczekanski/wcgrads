@@ -14,4 +14,3 @@ A bar graph showing the total number of students of each predicted gender
 latin_honors_gender shows the total number of students of each predicted gender
  who received each level of latin honors.
 }
-

@@ -18,4 +18,3 @@ clean4 returns completely cleaned dataset for a single year.
 \description{
 clean4() is the fourth part of the data cleaning series, it focuses on adding gender information.
 }
-

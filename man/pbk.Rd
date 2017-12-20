@@ -12,4 +12,3 @@ A bar graph showing the percentage of each graduating class awarded Phi Beta Kap
 \description{
 pbk shows the percentage of each graduating class that is awarded Phi Beta Kappa.
 }
-

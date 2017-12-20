@@ -13,4 +13,3 @@ There are also black lines that indicate the guidelines given in the Williams Co
 \description{
 total_latin_honors shows cumulative latin honors for comparison with guidelines given by the Williams College Faculty.
 }
-

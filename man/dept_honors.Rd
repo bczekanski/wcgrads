@@ -12,4 +12,3 @@ A bar graph showing the total number of graduates that earned some level of depa
 \description{
 dept_honors shows the total number of graduates that earned some level of departmental honors, by major and gender.
 }
-

@@ -16,4 +16,3 @@ findstrings(file) returns a tbl_df() of the section of the Williams College Cour
 findstrings() cuts the txt version of the Williams College Course Catalog to isolate the section
  of the Catalog that is just list of graduating seniors.
 }
-

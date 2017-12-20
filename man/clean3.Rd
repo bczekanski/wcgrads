@@ -18,4 +18,3 @@ clean3 returns partially cleaned data ready for clean4
 \description{
 clean3() is the third part of the data cleaning series, it focuses on departmental honors.
 }
-

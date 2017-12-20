@@ -12,4 +12,3 @@ A bar graph of graduating seniors by year
 \description{
 gradcount gets the count of graduates each year and graphs the information
 }
-

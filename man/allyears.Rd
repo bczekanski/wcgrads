@@ -13,4 +13,3 @@ the same as the allyrs dataset
 \description{
 allyrs runs getyr for all years and combines them into a single data frame
 }
-

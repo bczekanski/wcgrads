@@ -12,4 +12,3 @@ A graph showing the joint and marginal distribution of initials
 \description{
 initials() makes a graphic showing the frequency of initials and the marginal distributions of first and last initials.
 }
-
