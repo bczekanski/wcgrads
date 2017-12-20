@@ -1,4 +1,4 @@
-getpdfs <- function(){
+get_pdfs <- function(){
   #' @title Get PDFs
   #' @description getpdfs() downloads Williams College Catalogs PDFs from the Williams College website to inst/exdata
   #' @usage getpdfs()
